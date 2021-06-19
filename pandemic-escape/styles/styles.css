@@ -1,0 +1,56 @@
+/* colors: #37404A background grey */
+
+body {
+    display: flex;
+    background-image: url(/pandemic-escape/images/background.jpeg);
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+h1 {
+    font-size: xx-large;
+    display: block;
+    text-align: center;
+}
+#home {
+    height: 750px;
+    width: 750px;
+    background-color: #37404A;
+    margin-top: 50px;   
+}
+
+#home img {
+    width: 50px;
+    margin: 20px;
+}
+
+.rules {
+    width: 100%;
+    padding-top: 30px;
+    padding-right: 30px;
+    
+}
+.left {
+    text-align: right;
+    font-size: x-large;
+    font-weight: 700;
+}
+.middle {
+    text-align: center;
+    width: 25%;
+}
+.right {
+    text-align: left;
+    width: 25%;
+}
+
+.play {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+
+
