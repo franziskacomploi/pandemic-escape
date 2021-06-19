@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* colors: #37404A background grey */
 
 body {
@@ -54,3 +55,8 @@ h1 {
 
 
 
+=======
+.hidden {
+    display: none; 
+}
+>>>>>>> 2a9bf2d889906ee164c6d38691f31ffd15d94881
