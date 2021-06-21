@@ -1,7 +1,4 @@
 /* colors: #37404A background grey */
-.hidden {
-    display: none; 
-}
 
 html {
     font-size: 10px;
@@ -58,5 +55,7 @@ p {
     font-weight: 700;
 }
 
-
+.hidden {
+    display: none; 
+}
 
