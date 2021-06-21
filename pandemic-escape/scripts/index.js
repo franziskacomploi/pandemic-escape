@@ -1,14 +1,34 @@
-// Start Screen Interaction
+// Start Screen
 
-let startScreen = document.getElementById('home');
-let startButton = document.querySelector(".startButton");
+document.querySelector(".startButton").addEventListener('click', () => {
+document.getElementById('home').classList.add('hidden');
+document.getElementById('infoOne').classList.remove('hidden');
+});
 
-let infoOneScreen = document.getElementById('infoOne');
+// Info Screen One 
 
-startButton.addEventListener('click', () => {
-startScreen.classList.add('hidden');
-infoOneScreen.classList.remove('hidden');
+document.querySelector(".infoOneButton").addEventListener('click', () => {
+    document.getElementById('infoOne').classList.add('hidden');
+    document.getElementById('levelOne').classList.remove('hidden');
+
+});
+
+// Level One
+
+const canvasOne = document.getElementById("levelOneCanvas");
+let ctxOne = canvasOne.getContext("2d");
+
+
+// Add Class Hidden to Level One to get to Info Screen Two
+
+// Info Screen Two
+
+document.querySelector(".infoTwoButton").addEventListener('click', () => {
+    document.getElementById('infoTwo').classList.add('hidden');
+    document.getElementById('levelTwo').classList.remove('hidden');
 })
 
+// Level Two 
 
-
+const canvasTwo = document.getElementById("levelTwoCanvas");
+let ctxTwo = canvasTwo.getContext("2d");
