@@ -9,48 +9,82 @@
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <section id="home">
+        <section id="home" class="info gameBg">
             <h1>PANDEMIC ESCAPE</h1>
-
             <div>
                 <table class="rules">
                     <tr>
                       <th class="left">YOU</th>
-                      <th class="middle"><img src="images/player.jpeg" alt="player"></th>
+                      <th><img src="images/player.jpeg" alt="player"></th>
                     </tr>
                     <tr>
                       <td class="left">WHAT TO CATCH</td>
-                      <td class="middle"><img src="images/mask.png" alt="mask"></td>
+                      <td><img src="images/mask.png" alt="mask"></td>
                       <td class="right"><img src="images/injection.png" alt="vaccine"></td>
                     </tr>
                     <tr>
                       <td class="left">WHAT TO AVOID</td>
-                      <td class="middle"><img src="images/virus.png" alt="virus"></td>
+                      <td><img src="images/virus.png" alt="virus"></td>
                       <td class="right"><img src="images/querdenker.png" alt="querdenker"></td>
                     </tr>
                     <tr>
                         <td class="left">HOW TO PLAY</td>
-                        <td class="middle"><img src="images/keys.png" alt="keys"></td>
+                        <td><img src="images/keys.png" alt="keys"></td>
                       </tr>
                   </table>
             </div>
-            
-
             <div class="play">
                 <button class="startButton" type="button">PLAY</button>
             </div>
-          
-
         </section>
 
-        <section id="infoOne" class="hidden">
+        <!-- <section id="infoOne" class="info gameBg hidden">
+          <h1>LEVEL ONE</h1>
+          <div>
+            <img src="images/mask.png" alt="mask">
+            <img src="images/virus.png" alt="virus">
+          </div>
+          <p>It's the year 2020. A global pandemic is taking over. New rules and habits establish. <br> Collect as many masks as possible without catching the virus!</p>
           <button class="infoOneButton">PLAY</button>
-        </section>
+        </section>  -->
 
-      <section id="levelOne" class="hidden">
-        <canvas></canvas>
-      </section>
+        <!-- <section id="levelOne" class="gameBg"> 
+          <canvas></canvas>
+        </section> -->
 
+        <!-- <section id="infoTwo" class="info gameBg">
+          <h1>LEVEL TWO</h1>
+          <div>
+            <img src="images/mask.png" alt="mask">
+            <img src="images/injection.png" alt="vaccine">
+            <img src="images/virus.png" alt="virus">
+            <img src="images/querdenker.png" alt="querdenker">
+          </div>
+          <p>Congrats! You arrived in June 2021, vaccination is available.<br>Catch the precious injections!<br>But be careful: appointments are rare and so called Querdenker are lurking around, waiting to poison you with their conspiracy myths!</p>
+          <button class="infoTwoButton play">PLAY</button>
+        </section> -->
+
+        <!-- <section id="levelTwo" class="gameBg">
+          <canvas></canvas>
+        </section>  -->
+
+        <!-- <section id="win" class="info gameBg">
+          <h1>YOU WON!</h1>
+          <div>
+            <img src="images/cocktail.png" alt="cocktail">
+          </div>
+          <p>You made it!<br>Enjoy your newly acquired freedom because neither a deadly virus<br>nor the Querdenker could harm you!</p>
+          <button class="winButton play">PLAY AGAIN</button>
+        </section> -->
+
+        <!-- <section id="gameOver" class="info gameBg">
+          <h1>GAME OVER</h1>
+          <div>
+            <img src="images/cough.png" alt="cough">
+          </div>
+          <p>Oh no!<br>You weren't fast enough!<br>Try again!</p>
+          <button class="gameOverButton play">PLAY AGAIN</button>
+        </section> -->
 
         <script src="./scripts/index.js" async defer></script>
     </body>

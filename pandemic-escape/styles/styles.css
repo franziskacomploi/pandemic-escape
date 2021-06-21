@@ -1,4 +1,11 @@
 /* colors: #37404A background grey */
+.hidden {
+    display: none; 
+}
+
+html {
+    font-size: 10px;
+}
 
 body {
     display: flex;
@@ -9,16 +16,35 @@ body {
     font-family: 'Raleway', sans-serif;
     color: white;
 }
+
 h1 {
     font-size: xx-large;
     display: block;
     text-align: center;
 }
-#home {
-    height: 750px;
+
+p {
+    font-size: large;
+    text-align: center;
+    line-height: 3em;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.info img {
+    width: 80px;
+    margin: 20px;
+}
+
+.gameBg {
+    height: 600px;
     width: 750px;
     background-color: #37404A;
-    margin-top: 50px;   
+    margin-top: 10px;   
 }
 
 #home img {
@@ -26,38 +52,11 @@ h1 {
     margin: 20px;
 }
 
-.table {
-    display: flex;
-    justify-content: center;
-}
-.rules {
-    width: 100%;
-    padding-top: 30px;
-    padding-right: 30px;
-    
-}
 .left {
     text-align: right;
     font-size: x-large;
     font-weight: 700;
 }
-.middle {
-    text-align: center;
-    width: 25%;
-}
-.right {
-    text-align: left;
-    width: 25%;
-}
-
-.play {
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
-}
 
 
 
-.hidden {
-    display: none; 
-}
