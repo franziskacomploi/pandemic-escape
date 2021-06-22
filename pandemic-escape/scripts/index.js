@@ -14,6 +14,44 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   startLevelOne();
 });
 
+// Info Screen Two
+
+document.querySelector(".infoTwoButton").addEventListener("click", () => {
+  document.getElementById("infoTwo").classList.add("hidden");
+  document.getElementById("levelTwo").classList.remove("hidden");
+});
+
+// Lives Function
+
+function initializeLives(lives, livesDiv) {
+  const heartsArr = [];
+  for (let i = 1; i <= lives; i++) {
+    heartsArr.push(`<img class="heartImg" src="./images/heart.png"></img>`);
+  }
+  let hearts = heartsArr.join(" ");
+  livesDiv.innerHTML = `You have ${hearts} left.`;
+}
+
+function updateLivesOne() {
+  livesLevelOne--;
+  livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+}
+
+// Timer Function
+
+function initializeTimer(count, timerDiv) {
+  let timerCount = count;
+  timerDiv.innerHTML = `${timerCount} seconds left`;
+  const intervalId = setInterval(() => {
+    timerCount--;
+    timerDiv.innerHTML = `${timerCount} seconds left`;
+    if (timerCount == 0) {
+      clearInterval(intervalId);
+      timerDiv.innerHTML = `Time has run out!`;
+    }
+  }, 1000);
+}
+
 // Level One
 
 const canvasOne = document.getElementById("levelOneCanvas");
@@ -21,17 +59,8 @@ let ctxOne = canvasOne.getContext("2d");
 
 function startLevelOne() {
   // Timer One
-  let timerCountOne = 60;
   const timerOne = document.querySelector("#timerOne");
-  timerOne.innerHTML = `${timerCountOne} seconds left`;
-  const intervalIdOne = setInterval(() => {
-    timerCountOne--;
-    timerOne.innerHTML = `${timerCountOne} seconds left`;
-    if (timerCountOne == 0) {
-      clearInterval(intervalIdOne);
-      timerOne.innerHTML = `Time has run out!`;
-    }
-  }, 1000);
+  initializeTimer(60, timerOne);
 
   // Counter Two
   let countOne = 0;
@@ -43,24 +72,8 @@ function startLevelOne() {
   }
 
   // Lives Level One
-
   const livesOne = document.querySelector("#livesOne");
-
-  function initializeLivesOne(lives) {
-    const heartsOne = [];
-    for (let i = 1; i <= lives; i++) {
-      heartsOne.push(`<img class="heartImg" src="./images/heart.png"></img>`);
-    }
-    let hearts = heartsOne.join(",");
-    livesOne.innerHTML = `You have ${hearts} left.`;
-  }
-
-  initializeLivesOne(3);
-
-  function updateLivesOne() {
-    livesLevelOne--;
-    livesOne.innerHTML = `You have ${livesLevelOne} left.`;
-  }
+  initializeLives(3, livesOne);
 }
 
 // Task 2
@@ -79,31 +92,15 @@ function startLevelOne() {
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
 // Add "You collected XX masks in infoScreenTwo"
 
-// Info Screen Two
-
-document.querySelector(".infoTwoButton").addEventListener("click", () => {
-  document.getElementById("infoTwo").classList.add("hidden");
-  document.getElementById("levelTwo").classList.remove("hidden");
-});
-
 // Level Two
 
 const canvasTwo = document.getElementById("levelTwoCanvas");
 let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
-  // Timer Two
-  let timerCountTwo = 60;
+  // Timer One
   const timerTwo = document.querySelector("#timerTwo");
-  timerTwo.innerHTML = `${timerCountTwo} seconds left`;
-  const intervalIdTwo = setInterval(() => {
-    timerCountTwo--;
-    timerTwo.innerHTML = `${timerCountTwo} seconds left`;
-    if (timerCountTwo == 0) {
-      clearInterval(intervalIdTwo);
-      timerTwo.innerHTML = `Time has run out!`;
-    }
-  }, 1000);
+  initializeTimer(60, timerTwo);
 
   // Counter Two
   let countTwo = 0;
@@ -115,14 +112,8 @@ function startLevelTwo() {
   }
 
   // Lives Level Two
-
-  let livesLevelTwo = 3;
   const livesTwo = document.querySelector("#livesTwo");
-  livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
-  function updateLivesTwo() {
-    livesLevelTwo--;
-    livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
-  }
+  initializeLives(3, livesTwo);
 }
 
 // Canvas

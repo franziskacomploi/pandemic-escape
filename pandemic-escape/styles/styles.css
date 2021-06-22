@@ -59,6 +59,8 @@ p {
     display: none; 
 }
 
+
+/* Lives, Points, Timer */ 
 .heartImg {
     width: 20px;
 }
