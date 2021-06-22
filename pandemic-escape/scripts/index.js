@@ -52,6 +52,17 @@ function initializeTimer(count, timerDiv) {
   }, 1000);
 }
 
+// Counter Function
+
+function initializeCounter(count, counterDiv) {
+  counterDiv.innerHTML = `You have: ${count} points.`;
+}
+
+function updateCounter(count, counterDiv) {
+  count++;
+  counterDiv.innerHTML = `You have: ${count} points.`;
+}
+
 // Level One
 
 const canvasOne = document.getElementById("levelOneCanvas");
@@ -62,14 +73,9 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeTimer(60, timerOne);
 
-  // Counter Two
-  let countOne = 0;
+  // Counter One
   const counterOne = document.querySelector("#counterOne");
-  counterOne.innerHTML = `You have: ${countOne} points.`;
-  function updateCounterOne() {
-    countOne++;
-    counterOne.innerHTML = `You have: ${countOne} points.`;
-  }
+  initializeCounter(0, counterOne);
 
   // Lives Level One
   const livesOne = document.querySelector("#livesOne");
@@ -102,14 +108,8 @@ function startLevelTwo() {
   const timerTwo = document.querySelector("#timerTwo");
   initializeTimer(60, timerTwo);
 
-  // Counter Two
-  let countTwo = 0;
   const counterTwo = document.querySelector("#counterTwo");
-  counterTwo.innerHTML = `You have: ${countTwo} points.`;
-  function updateCounterTwo() {
-    countTwo++;
-    counterTwo.innerHTML = `You have: ${countTwo} points.`;
-  }
+  initializeCounter(0, counterTwo);
 
   // Lives Level Two
   const livesTwo = document.querySelector("#livesTwo");
