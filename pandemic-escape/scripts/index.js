@@ -21,8 +21,6 @@ let ctxOne = canvasOne.getContext("2d");
 
 // Task 1
 // "Lives" --> DOM
-// Counter that counts points --> DOM
-// Start Level 1 Button
 
 // Timer One
 let timerCountOne = 60;
@@ -36,6 +34,16 @@ const intervalIdOne = setInterval(() => {
     timerOne.innerHTML = `Time has run out!`;
   }
 }, 1000);
+
+
+// Counter One
+let counterOne = 0;
+let counterOne = document.querySelector("#counterOne");
+function updateCounterOne() {
+    counterOne++;
+}
+counterOne.innerHTML = `You have: ${counterOne} points.`;
+
 
 // Task 2
 // Canvas
@@ -80,8 +88,13 @@ const intervalIdTwo = setInterval(() => {
   }
 }, 1000);
 
-// Counter that counts points --> Same as Level 1
-// "Lives" --> Same as Level 1
+// Counter Two
+let counterTwo = 0;
+let counterTwo = document.querySelector("#counterTwo");
+function updateCounterTwo() {
+    counterTwo++;
+}
+counterTwo.innerHTML = `You have: ${counterTwo} points.`;
 
 // Canvas
 // Background --> Same as Level 1 (maybe different image)
