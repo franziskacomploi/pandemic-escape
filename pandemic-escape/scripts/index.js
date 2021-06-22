@@ -68,19 +68,116 @@ function updateCounter(count, counterDiv) {
 const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
-function startLevelOne() {
-  // Timer One
-  const timerOne = document.querySelector("#timerOne");
-  initializeTimer(60, timerOne);
 
-  // Counter One
-  const counterOne = document.querySelector("#counterOne");
-  initializeCounter(0, counterOne);
-
-  // Lives Level One
-  const livesOne = document.querySelector("#livesOne");
-  initializeLives(3, livesOne);
+// Background
+class Background {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = canvasOne.width;
+        this.height = canvasOne.height;
+        this.img = new Image();
+        this.img.src = "./images/gameBg.jpeg";
+        this.speed = -2;
+    }
+    drawBg() {
+        ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+        ctxOne.drawImage(
+            this.img,
+            this.x + canvasOne.width,
+            this.y, 
+            this.width,
+            this.height
+        );
+    }
+    move() {
+        this.x += this.speed;
+        this.x %= canvasOne.width;
+    }
 }
+let bg = new Background(0,0);
+
+// Player
+class Player {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.img = new Image();
+        this.img.src = "./images/player.jpeg";
+    }
+    drawPlayer() {
+        ctxOne.drawImage(this.img, this.x, this.y, 50, (50/this.width)*this.height);
+    }
+}
+let player = new Player(0, 240, 10, 10);
+
+let gameFrames = 0;
+
+
+// Keys
+document.onkeydown = function (e) {
+    //left
+    if (e.keyCode === 37) {
+        if (player.x >= 0 && player.x < 621) { 
+            player.x -= 20;
+        }
+    }
+    //right
+    if (e.keyCode === 39) {
+        if (player.x >= 0 && player.x < 620) {
+            player.x += 20;
+        }
+    }
+    //up
+    if (e.keyCode === 38) {
+        if (player.y > 0 && player.y < 500) {
+            player.y -= 20;
+        }
+    }
+    //down
+    if (e.keyCode === 40) {
+        if (player.y >=0 && player.y < 449) {
+            player.y += 20;
+        }
+    }
+};
+
+
+// Start Game
+function startLevelOne() {
+    // Timer One
+    const timerOne = document.querySelector("#timerOne");
+    initializeTimer(60, timerOne);
+  
+    // Counter One
+    const counterOne = document.querySelector("#counterOne");
+    initializeCounter(0, counterOne);
+  
+    // Lives Level One
+    const livesOne = document.querySelector("#livesOne");
+    initializeLives(3, livesOne);
+    setInterval(() => {
+        ctxOne.clearRect(0, 0, 700, 500);
+
+        // Background
+        bg.move();
+        bg.drawBg();
+
+        // Player Image
+        player.drawPlayer();
+
+        gameFrames++;
+    }, 20);
+}
+
+
+// Task 1
+// Timer that runs out = 60 seconds --> SetInterval mit 1000 ms
+// "Lives" --> DOM
+// Counter that counts points --> DOM
+// Start Level 1 Button
 
 // Task 2
 // Canvas
@@ -99,9 +196,17 @@ function startLevelOne() {
 // Add "You collected XX masks in infoScreenTwo"
 
 // Level Two
+// Info Screen Two
 
-const canvasTwo = document.getElementById("levelTwoCanvas");
-let ctxTwo = canvasTwo.getContext("2d");
+// document.querySelector(".infoTwoButton").addEventListener('click', () => {
+//     document.getElementById('infoTwo').classList.add('hidden');
+//     document.getElementById('levelTwo').classList.remove('hidden');
+// })
+
+// // Level Two 
+
+// const canvasTwo = document.getElementById("levelTwoCanvas");
+// let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
   // Timer One
