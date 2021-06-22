@@ -19,38 +19,38 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
 const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
-// Task 1
-
-// Timer One
-let timerCountOne = 60;
-let timerOne = document.querySelector("#timerOne");
-timerOne.innerHTML = `${timerCountOne} seconds left`;
-const intervalIdOne = setInterval(() => {
-  timerCountOne--;
+function startLevelOne() {
+  // Timer One
+  let timerCountOne = 60;
+  let timerOne = document.querySelector("#timerOne");
   timerOne.innerHTML = `${timerCountOne} seconds left`;
-  if (timerCountOne == 0) {
-    clearInterval(intervalIdOne);
-    timerOne.innerHTML = `Time has run out!`;
+  const intervalIdOne = setInterval(() => {
+    timerCountOne--;
+    timerOne.innerHTML = `${timerCountOne} seconds left`;
+    if (timerCountOne == 0) {
+      clearInterval(intervalIdOne);
+      timerOne.innerHTML = `Time has run out!`;
+    }
+  }, 1000);
+
+  // Counter Two
+  let countOne = 0;
+  let counterOne = document.querySelector("#counterOne");
+  counterOne.innerHTML = `You have: ${countOne} points.`;
+  function updateCounterOne() {
+    countOne++;
+    counterOne.innerHTML = `You have: ${countOne} points.`;
   }
-}, 1000);
 
-// Counter One
-let counterOne = 0;
-let counterOne = document.querySelector("#counterOne");
-counterOne.innerHTML = `You have: ${counterOne} points.`;
-function updateCounterOne() {
-  counterOne++;
-  counterOne.innerHTML = `You have: ${counterOne} points.`;
-}
+  // Lives Level One
 
-// Lives Level One
-
-let livesLevelOne = 3;
-let livesOne = document.querySelector("#livesOne");
-livesOne.innerHTML = `You have ${livesLevelOne} left.`;
-function updateLivesOne() {
-  livesLevelOne--;
+  let livesLevelOne = 3;
+  let livesOne = document.querySelector("#livesOne");
   livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+  function updateLivesOne() {
+    livesLevelOne--;
+    livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+  }
 }
 
 // Task 2
@@ -64,8 +64,6 @@ function updateLivesOne() {
 
 // Task 3
 // Start Game Function Game Logic (collect points etc.)
-
-function startLevelOne() {}
 
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
@@ -83,36 +81,38 @@ document.querySelector(".infoTwoButton").addEventListener("click", () => {
 const canvasTwo = document.getElementById("levelTwoCanvas");
 let ctxTwo = canvasTwo.getContext("2d");
 
-// Timer Two
-let timerCountTwo = 60;
-let timerTwo = document.querySelector("#timerTwo");
-timerTwo.innerHTML = `${timerCountTwo} seconds left`;
-const intervalIdTwo = setInterval(() => {
-  timerCountTwo--;
-  timerOne.innerHTML = `${timerCountTwo} seconds left`;
-  if (timerCountTwo == 0) {
-    clearInterval(intervalIdTwo);
-    timerTwo.innerHTML = `Time has run out!`;
+function startLevelTwo() {
+  // Timer Two
+  let timerCountTwo = 60;
+  let timerTwo = document.querySelector("#timerTwo");
+  timerTwo.innerHTML = `${timerCountTwo} seconds left`;
+  const intervalIdTwo = setInterval(() => {
+    timerCountTwo--;
+    timerTwo.innerHTML = `${timerCountTwo} seconds left`;
+    if (timerCountTwo == 0) {
+      clearInterval(intervalIdTwo);
+      timerTwo.innerHTML = `Time has run out!`;
+    }
+  }, 1000);
+
+  // Counter Two
+  let countTwo = 0;
+  let counterTwo = document.querySelector("#counterTwo");
+  counterTwo.innerHTML = `You have: ${countTwo} points.`;
+  function updateCounterTwo() {
+    countTwo++;
+    counterTwo.innerHTML = `You have: ${countTwo} points.`;
   }
-}, 1000);
 
-// Counter Two
-let counterTwo = 0;
-let counterTwo = document.querySelector("#counterTwo");
-counterTwo.innerHTML = `You have: ${counterTwo} points.`;
-function updateCounterTwo() {
-  counterTwo++;
-  counterTwo.innerHTML = `You have: ${counterTwo} points.`;
-}
+  // Lives Level Two
 
-// Lives Level Two
-
-let livesLevelTwo = 3;
-let livesTwo = document.querySelector("#livesTwo");
-livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
-function updateLivesTwo() {
-  livesLevelTwo--;
+  let livesLevelTwo = 3;
+  let livesTwo = document.querySelector("#livesTwo");
   livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
+  function updateLivesTwo() {
+    livesLevelTwo--;
+    livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
+  }
 }
 
 // Canvas
