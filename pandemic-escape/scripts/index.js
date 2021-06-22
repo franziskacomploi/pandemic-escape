@@ -22,7 +22,7 @@ let ctxOne = canvasOne.getContext("2d");
 function startLevelOne() {
   // Timer One
   let timerCountOne = 60;
-  let timerOne = document.querySelector("#timerOne");
+  const timerOne = document.querySelector("#timerOne");
   timerOne.innerHTML = `${timerCountOne} seconds left`;
   const intervalIdOne = setInterval(() => {
     timerCountOne--;
@@ -35,7 +35,7 @@ function startLevelOne() {
 
   // Counter Two
   let countOne = 0;
-  let counterOne = document.querySelector("#counterOne");
+  const counterOne = document.querySelector("#counterOne");
   counterOne.innerHTML = `You have: ${countOne} points.`;
   function updateCounterOne() {
     countOne++;
@@ -44,9 +44,19 @@ function startLevelOne() {
 
   // Lives Level One
 
-  let livesLevelOne = 3;
-  let livesOne = document.querySelector("#livesOne");
-  livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+  const livesOne = document.querySelector("#livesOne");
+
+  function initializeLivesOne(lives) {
+    const heartsOne = [];
+    for (let i = 1; i <= lives; i++) {
+      heartsOne.push(`<img class="heartImg" src="./images/heart.png"></img>`);
+    }
+    let hearts = heartsOne.join(",");
+    livesOne.innerHTML = `You have ${hearts} left.`;
+  }
+
+  initializeLivesOne(3);
+
   function updateLivesOne() {
     livesLevelOne--;
     livesOne.innerHTML = `You have ${livesLevelOne} left.`;
@@ -84,7 +94,7 @@ let ctxTwo = canvasTwo.getContext("2d");
 function startLevelTwo() {
   // Timer Two
   let timerCountTwo = 60;
-  let timerTwo = document.querySelector("#timerTwo");
+  const timerTwo = document.querySelector("#timerTwo");
   timerTwo.innerHTML = `${timerCountTwo} seconds left`;
   const intervalIdTwo = setInterval(() => {
     timerCountTwo--;
@@ -97,7 +107,7 @@ function startLevelTwo() {
 
   // Counter Two
   let countTwo = 0;
-  let counterTwo = document.querySelector("#counterTwo");
+  const counterTwo = document.querySelector("#counterTwo");
   counterTwo.innerHTML = `You have: ${countTwo} points.`;
   function updateCounterTwo() {
     countTwo++;
@@ -107,7 +117,7 @@ function startLevelTwo() {
   // Lives Level Two
 
   let livesLevelTwo = 3;
-  let livesTwo = document.querySelector("#livesTwo");
+  const livesTwo = document.querySelector("#livesTwo");
   livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
   function updateLivesTwo() {
     livesLevelTwo--;
