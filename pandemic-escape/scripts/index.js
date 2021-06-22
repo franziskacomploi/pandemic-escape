@@ -20,7 +20,6 @@ const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
 // Task 1
-// "Lives" --> DOM
 
 // Timer One
 let timerCountOne = 60;
@@ -35,15 +34,24 @@ const intervalIdOne = setInterval(() => {
   }
 }, 1000);
 
-
 // Counter One
 let counterOne = 0;
 let counterOne = document.querySelector("#counterOne");
-function updateCounterOne() {
-    counterOne++;
-}
 counterOne.innerHTML = `You have: ${counterOne} points.`;
+function updateCounterOne() {
+  counterOne++;
+  counterOne.innerHTML = `You have: ${counterOne} points.`;
+}
 
+// Lives Level One
+
+let livesLevelOne = 3;
+let livesOne = document.querySelector("#livesOne");
+livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+function updateLivesOne() {
+  livesLevelOne--;
+  livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+}
 
 // Task 2
 // Canvas
@@ -91,10 +99,21 @@ const intervalIdTwo = setInterval(() => {
 // Counter Two
 let counterTwo = 0;
 let counterTwo = document.querySelector("#counterTwo");
-function updateCounterTwo() {
-    counterTwo++;
-}
 counterTwo.innerHTML = `You have: ${counterTwo} points.`;
+function updateCounterTwo() {
+  counterTwo++;
+  counterTwo.innerHTML = `You have: ${counterTwo} points.`;
+}
+
+// Lives Level Two
+
+let livesLevelTwo = 3;
+let livesTwo = document.querySelector("#livesTwo");
+livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
+function updateLivesTwo() {
+  livesLevelTwo--;
+  livesTwo.innerHTML = `You have ${livesLevelTwo} left.`;
+}
 
 // Canvas
 // Background --> Same as Level 1 (maybe different image)
