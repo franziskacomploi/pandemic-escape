@@ -32,9 +32,9 @@ function initializeLives(lives, livesDiv) {
   livesDiv.innerHTML = `You have ${hearts} left.`;
 }
 
-function updateLivesOne() {
-  livesLevelOne--;
-  livesOne.innerHTML = `You have ${livesLevelOne} left.`;
+function updateLivesOne(lives, livesDiv) {
+  lives--;
+  livesDiv.innerHTML = `You have ${lives} left.`;
 }
 
 // Timer Function
