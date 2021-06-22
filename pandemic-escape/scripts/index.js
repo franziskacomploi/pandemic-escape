@@ -1,18 +1,17 @@
 // Start Screen
 
-document.querySelector(".startButton").addEventListener('click', () => {
-document.getElementById('home').classList.add('hidden');
-document.getElementById('infoOne').classList.remove('hidden');
+document.querySelector(".startButton").addEventListener("click", () => {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("infoOne").classList.remove("hidden");
 });
 
-// Info Screen One 
+// Info Screen One
 
-document.querySelector(".infoOneButton").addEventListener('click', () => {
-    document.getElementById('infoOne').classList.add('hidden');
-    document.getElementById('levelOne').classList.remove('hidden');
-    // eventually Countdown to startGame
-    startLevelOne();
-
+document.querySelector(".infoOneButton").addEventListener("click", () => {
+  document.getElementById("infoOne").classList.add("hidden");
+  document.getElementById("levelOne").classList.remove("hidden");
+  // eventually Countdown to startGame
+  startLevelOne();
 });
 
 // Level One
@@ -21,15 +20,27 @@ const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
 // Task 1
-// Timer that runs out = 60 seconds --> SetInterval mit 1000 ms
 // "Lives" --> DOM
 // Counter that counts points --> DOM
 // Start Level 1 Button
 
+// Timer One
+let timerCountOne = 60;
+let timerOne = document.querySelector("#timerOne");
+timerOne.innerHTML = `${timerCountOne} seconds left`;
+const intervalIdOne = setInterval(() => {
+  timerCountOne--;
+  timerOne.innerHTML = `${timerCountOne} seconds left`;
+  if (timerCountOne == 0) {
+    clearInterval(intervalIdOne);
+    timerOne.innerHTML = `Time has run out!`;
+  }
+}, 1000);
+
 // Task 2
 // Canvas
 // Background that moves --> image looping
-// Class Player needed: Mouth 
+// Class Player needed: Mouth
 // Control via Arrows
 // Class Counterpart = Masks, Virus
 // "Obstacles" = Virus --> How do they move?
@@ -38,26 +49,37 @@ let ctxOne = canvasOne.getContext("2d");
 // Task 3
 // Start Game Function Game Logic (collect points etc.)
 
-function startLevelOne() {
+function startLevelOne() {}
 
-}
-
-
+// Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
+// Add "You collected XX masks in infoScreenTwo"
 
 // Info Screen Two
 
-document.querySelector(".infoTwoButton").addEventListener('click', () => {
-    document.getElementById('infoTwo').classList.add('hidden');
-    document.getElementById('levelTwo').classList.remove('hidden');
-})
+document.querySelector(".infoTwoButton").addEventListener("click", () => {
+  document.getElementById("infoTwo").classList.add("hidden");
+  document.getElementById("levelTwo").classList.remove("hidden");
+});
 
-// Level Two 
+// Level Two
 
 const canvasTwo = document.getElementById("levelTwoCanvas");
 let ctxTwo = canvasTwo.getContext("2d");
 
-// Timer that runs out --> Same as Level 1
+// Timer Two
+let timerCountTwo = 60;
+let timerTwo = document.querySelector("#timerTwo");
+timerTwo.innerHTML = `${timerCountTwo} seconds left`;
+const intervalIdTwo = setInterval(() => {
+  timerCountTwo--;
+  timerOne.innerHTML = `${timerCountTwo} seconds left`;
+  if (timerCountTwo == 0) {
+    clearInterval(intervalIdTwo);
+    timerTwo.innerHTML = `Time has run out!`;
+  }
+}, 1000);
+
 // Counter that counts points --> Same as Level 1
 // "Lives" --> Same as Level 1
 
@@ -69,7 +91,6 @@ let ctxTwo = canvasTwo.getContext("2d");
 // Masks = more points --> Same as Level 1
 // Virus, Querdenker (quicker than virus) = costs a live --> Same as Level 1
 // Needles = You need at least two to win --> New as an addition
-
 
 // You loose = Section mit class hidden
 
