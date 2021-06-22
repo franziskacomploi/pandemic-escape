@@ -19,7 +19,7 @@ const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
 
-// Add Class Hidden to Level One to get to Info Screen Two
+// Add Class Hidden to Level One to get to Info Screen Two - You loos or win?
 
 // Info Screen Two
 
