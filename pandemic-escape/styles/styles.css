@@ -59,3 +59,17 @@ p {
     display: none; 
 }
 
+
+/* Lives, Points, Timer */ 
+
+
+.level {
+    font-size: medium;
+    padding: 2%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.heartImg {
+    width: 20px;
+}
