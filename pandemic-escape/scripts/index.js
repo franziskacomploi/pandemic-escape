@@ -97,21 +97,92 @@ class Background {
 }
 let bg = new Background(0,0);
 
+
+
 // Player
 class Player {
-    constructor(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.img = new Image();
-        this.img.src = "./images/player.jpeg";
-    }
-    drawPlayer() {
-        ctxOne.drawImage(this.img, this.x, this.y, 50, (50/this.width)*this.height);
-    }
+  constructor(x, y, width, height) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.img = new Image();
+      this.img.src = "./images/player.jpeg";
+  }
+  drawPlayer() {
+      ctxOne.drawImage(this.img, this.x, this.y, 50, (50/this.width)*this.height);
+  }
 }
 let player = new Player(0, 240, 10, 10);
+
+
+
+// Obstacle 
+class Obstacle {
+  constructor(img, danger) {
+    this.x = 700;
+    this.y = Math.floor(Math.random()*500);
+    this.vx = -5;
+    this.width = 50;
+    this.height = (50/this.width)*this.height;
+    this.img = img;
+    this.danger = danger
+  }
+  draw(){
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+}
+
+// Mask /// is adding masks to the array but not to the screen yet
+let masks = [];
+const maskImg = new Image();
+maskImg.src = "./images/mask.png";
+
+class Mask extends Obstacle {
+  constructor() {
+    super(maskImg, false);
+  }
+};
+function createMasks(){
+  if (gameFrames % 180 === 0){
+    console.log(masks)
+    masks.push(new Mask());
+  };
+};
+function updateMasks(){
+  for (let i=0; i < masks.length; i++) {
+    masks[i].x += masks[i].vx;
+    masks[i].draw();
+  }
+}
+
+// // Virus
+// let viruses = [];
+// const virusImg = new Image();
+// virusImg.src = "./imgages/virus.png"
+
+// class Virus extends Obstacle {
+//   constructor() {
+//     super(virusImg, true);
+//   }
+// };
+// function createVirus(){
+//   if (gameFrames % 180 === 0){
+//     viruses.push(new Virus());
+//   };
+// };
+// function updateMasks(){
+//   for (let i=0; i < viruses.length; i++) {
+//     console.log("drawing virus", gameFrames)
+//     viruses[i].x += viruses[i].vy;
+//     viruses[i].draw();
+//   }
+// }
+
+
+
+
 
 let gameFrames = 0;
 
@@ -120,7 +191,7 @@ let gameFrames = 0;
 document.onkeydown = function (e) {
     //left
     if (e.keyCode === 37) {
-        if (player.x >= 0 && player.x < 621) { 
+        if (player.x > 0 && player.x < 621) { 
             player.x -= 20;
         }
     }
@@ -158,6 +229,8 @@ function startLevelOne() {
     // Lives Level One
     const livesOne = document.querySelector("#livesOne");
     initializeLives(3, livesOne);
+
+    // Playground
     setInterval(() => {
         ctxOne.clearRect(0, 0, 700, 500);
 
@@ -167,6 +240,12 @@ function startLevelOne() {
 
         // Player Image
         player.drawPlayer();
+
+        createMasks();
+        updateMasks();
+
+        // createVirus();
+        // updateVirus();
 
         gameFrames++;
     }, 20);
