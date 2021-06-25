@@ -252,22 +252,11 @@ function startLevelOne() {
 }
 
 
-// Task 1
-// Timer that runs out = 60 seconds --> SetInterval mit 1000 ms
-// "Lives" --> DOM
-// Counter that counts points --> DOM
-// Start Level 1 Button
 
-// Task 2
-// Canvas
-// Background that moves --> image looping
-// Class Player needed: Mouth
-// Control via Arrows
+
 // Class Counterpart = Masks, Virus
 // "Obstacles" = Virus --> How do they move?
 // "Points" = Masks
-
-// Task 3
 // Start Game Function Game Logic (collect points etc.)
 
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
