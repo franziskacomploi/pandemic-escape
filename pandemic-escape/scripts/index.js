@@ -117,7 +117,7 @@ class Obstacle {
   constructor(danger) {
     this.x = 700;
     this.y = Math.floor(Math.random() * 500);
-    this.vx = -5;
+    this.vx = -4;
     this.width = 60;
     this.height = 60;
     this.img = new Image();
@@ -158,10 +158,11 @@ class Virus extends Obstacle {
     super(danger);
     this.danger = true;
     this.img.src = "./images/virus.png";
+    this.vx = -6;
   }
 }
 function createVirus() {
-  if (gameFrames % 180 === 0) {
+  if (gameFrames % 150 === 0) {
     viruses.push(new Virus());
   }
 }
