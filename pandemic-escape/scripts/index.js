@@ -271,7 +271,6 @@ function startLevelOne() {
 //     document.getElementById('levelTwo').classList.remove('hidden');
 // })
 
-// // Level Two 
 
 // const canvasTwo = document.getElementById("levelTwoCanvas");
 // let ctxTwo = canvasTwo.getContext("2d");
