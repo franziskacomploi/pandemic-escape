@@ -101,32 +101,32 @@ let bg = new Background(0,0);
 
 // Player
 class Player {
-  constructor(x, y, width, height) {
+  constructor(x, y) {
       this.x = x;
       this.y = y;
-      this.width = width;
-      this.height = height;
+      this.width = 50;
+      this.height = 50;
       this.img = new Image();
       this.img.src = "./images/player.jpeg";
   }
   drawPlayer() {
-      ctxOne.drawImage(this.img, this.x, this.y, 50, (50/this.width)*this.height);
+      ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
-let player = new Player(0, 240, 10, 10);
+let player = new Player(0, 240);
 
 
 
 // Obstacle 
 class Obstacle {
-  constructor(img, danger) {
+  constructor(danger) {
     this.x = 700;
     this.y = Math.floor(Math.random()*500);
     this.vx = -5;
-    this.width = 50;
-    this.height = (50/this.width)*this.height;
-    this.img = img;
-    this.danger = danger
+    this.width = 60;
+    this.height = 60;
+    this.img = new Image ();
+    this.danger = danger;
   }
   draw(){
     ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -136,24 +136,24 @@ class Obstacle {
 
 // Mask /// is adding masks to the array but not to the screen yet
 let masks = [];
-const maskImg = new Image();
-maskImg.src = "./images/mask.png";
 
 class Mask extends Obstacle {
-  constructor() {
-    super(maskImg, false);
+  constructor(danger) {
+    super(danger);
+    this.img.src = "./images/mask.png";
   }
 };
 function createMasks(){
   if (gameFrames % 180 === 0){
     console.log(masks)
-    masks.push(new Mask());
+    masks.push(new Mask(false));
   };
 };
 function updateMasks(){
   for (let i=0; i < masks.length; i++) {
     masks[i].x += masks[i].vx;
     masks[i].draw();
+    console.log("Drawing", masks[i]);
   }
 }
 
