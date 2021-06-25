@@ -68,73 +68,67 @@ function updateCounter(count, counterDiv) {
 const canvasOne = document.getElementById("levelOneCanvas");
 let ctxOne = canvasOne.getContext("2d");
 
-
 // Background
 class Background {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.width = canvasOne.width;
-        this.height = canvasOne.height;
-        this.img = new Image();
-        this.img.src = "./images/gameBg.jpeg";
-        this.speed = -2;
-    }
-    drawBg() {
-        ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
-        ctxOne.drawImage(
-            this.img,
-            this.x + canvasOne.width,
-            this.y, 
-            this.width,
-            this.height
-        );
-    }
-    move() {
-        this.x += this.speed;
-        this.x %= canvasOne.width;
-    }
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = canvasOne.width;
+    this.height = canvasOne.height;
+    this.img = new Image();
+    this.img.src = "./images/gameBg.jpeg";
+    this.speed = -2;
+  }
+  drawBg() {
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctxOne.drawImage(
+      this.img,
+      this.x + canvasOne.width,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+  move() {
+    this.x += this.speed;
+    this.x %= canvasOne.width;
+  }
 }
-let bg = new Background(0,0);
-
-
+let bg = new Background(0, 0);
 
 // Player
 class Player {
   constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.width = 50;
-      this.height = 50;
-      this.img = new Image();
-      this.img.src = "./images/player.jpeg";
+    this.x = x;
+    this.y = y;
+    this.width = 50;
+    this.height = 50;
+    this.img = new Image();
+    this.img.src = "./images/player.jpeg";
   }
   drawPlayer() {
-      ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 let player = new Player(0, 240);
 
-
-
-// Obstacle 
+// Obstacle
 class Obstacle {
   constructor(danger) {
     this.x = 700;
-    this.y = Math.floor(Math.random()*500);
+    this.y = Math.floor(Math.random() * 500);
     this.vx = -5;
     this.width = 60;
     this.height = 60;
-    this.img = new Image ();
+    this.img = new Image();
     this.danger = danger;
   }
-  draw(){
+  draw() {
     ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
-
 }
 
-// Mask /// is adding masks to the array but not to the screen yet
+// Mask
 let masks = [];
 
 class Mask extends Obstacle {
@@ -142,117 +136,106 @@ class Mask extends Obstacle {
     super(danger);
     this.img.src = "./images/mask.png";
   }
-};
-function createMasks(){
-  if (gameFrames % 180 === 0){
-    console.log(masks)
+}
+function createMasks() {
+  if (gameFrames % 180 === 0) {
+    console.log(masks);
     masks.push(new Mask(false));
-  };
-};
-function updateMasks(){
-  for (let i=0; i < masks.length; i++) {
+  }
+}
+function updateMasks() {
+  for (let i = 0; i < masks.length; i++) {
     masks[i].x += masks[i].vx;
     masks[i].draw();
     console.log("Drawing", masks[i]);
   }
 }
 
-// // Virus
-// let viruses = [];
-// const virusImg = new Image();
-// virusImg.src = "./imgages/virus.png"
+// Virus
+let viruses = [];
 
-// class Virus extends Obstacle {
-//   constructor() {
-//     super(virusImg, true);
-//   }
-// };
-// function createVirus(){
-//   if (gameFrames % 180 === 0){
-//     viruses.push(new Virus());
-//   };
-// };
-// function updateMasks(){
-//   for (let i=0; i < viruses.length; i++) {
-//     console.log("drawing virus", gameFrames)
-//     viruses[i].x += viruses[i].vy;
-//     viruses[i].draw();
-//   }
-// }
-
-
-
-
+class Virus extends Obstacle {
+  constructor(danger) {
+    super(danger);
+    this.img.src = "./imgages/virus.png";
+  }
+}
+function createVirus() {
+  if (gameFrames % 160 === 0) {
+    viruses.push(new Virus(true));
+  }
+}
+function updateMasks() {
+  for (let i = 0; i < viruses.length; i++) {
+    viruses[i].x += viruses[i].vy;
+    viruses[i].draw();
+  }
+}
 
 let gameFrames = 0;
 
-
 // Keys
 document.onkeydown = function (e) {
-    //left
-    if (e.keyCode === 37) {
-        if (player.x > 0 && player.x < 621) { 
-            player.x -= 20;
-        }
+  //left
+  if (e.keyCode === 37) {
+    if (player.x > 0 && player.x < 621) {
+      player.x -= 20;
     }
-    //right
-    if (e.keyCode === 39) {
-        if (player.x >= 0 && player.x < 620) {
-            player.x += 20;
-        }
+  }
+  //right
+  if (e.keyCode === 39) {
+    if (player.x >= 0 && player.x < 620) {
+      player.x += 20;
     }
-    //up
-    if (e.keyCode === 38) {
-        if (player.y > 0 && player.y < 500) {
-            player.y -= 20;
-        }
+  }
+  //up
+  if (e.keyCode === 38) {
+    if (player.y > 0 && player.y < 500) {
+      player.y -= 20;
     }
-    //down
-    if (e.keyCode === 40) {
-        if (player.y >=0 && player.y < 449) {
-            player.y += 20;
-        }
+  }
+  //down
+  if (e.keyCode === 40) {
+    if (player.y >= 0 && player.y < 449) {
+      player.y += 20;
     }
+  }
 };
-
 
 // Start Game
 function startLevelOne() {
-    // Timer One
-    const timerOne = document.querySelector("#timerOne");
-    initializeTimer(60, timerOne);
-  
-    // Counter One
-    const counterOne = document.querySelector("#counterOne");
-    initializeCounter(0, counterOne);
-  
-    // Lives Level One
-    const livesOne = document.querySelector("#livesOne");
-    initializeLives(3, livesOne);
+  // Timer One
+  const timerOne = document.querySelector("#timerOne");
+  initializeTimer(60, timerOne);
 
-    // Playground
-    setInterval(() => {
-        ctxOne.clearRect(0, 0, 700, 500);
+  // Counter One
+  const counterOne = document.querySelector("#counterOne");
+  initializeCounter(0, counterOne);
 
-        // Background
-        bg.move();
-        bg.drawBg();
+  // Lives Level One
+  const livesOne = document.querySelector("#livesOne");
+  initializeLives(3, livesOne);
 
-        // Player Image
-        player.drawPlayer();
+  // Playground
+  setInterval(() => {
+    ctxOne.clearRect(0, 0, 700, 500);
 
-        createMasks();
-        updateMasks();
+    // Background
+    bg.move();
+    bg.drawBg();
 
-        // createVirus();
-        // updateVirus();
+    // Player Image
+    player.drawPlayer();
 
-        gameFrames++;
-    }, 20);
+    createMasks();
+    updateMasks();
+
+    createVirus();
+    updateVirus();
+
+    gameFrames++;
+  }, 20);
 }
-
-
-
 
 // Class Counterpart = Masks, Virus
 // "Obstacles" = Virus --> How do they move?
@@ -270,7 +253,6 @@ function startLevelOne() {
 //     document.getElementById('infoTwo').classList.add('hidden');
 //     document.getElementById('levelTwo').classList.remove('hidden');
 // })
-
 
 // const canvasTwo = document.getElementById("levelTwoCanvas");
 // let ctxTwo = canvasTwo.getContext("2d");
