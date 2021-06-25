@@ -124,7 +124,7 @@ class Obstacle {
     this.danger = danger;
   }
   draw() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+      ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -134,20 +134,19 @@ let masks = [];
 class Mask extends Obstacle {
   constructor(danger) {
     super(danger);
+    this.danger = false;
     this.img.src = "./images/mask.png";
   }
 }
 function createMasks() {
   if (gameFrames % 180 === 0) {
-    console.log(masks);
-    masks.push(new Mask(false));
+    masks.push(new Mask());
   }
 }
 function updateMasks() {
   for (let i = 0; i < masks.length; i++) {
     masks[i].x += masks[i].vx;
     masks[i].draw();
-    console.log("Drawing", masks[i]);
   }
 }
 
@@ -157,17 +156,18 @@ let viruses = [];
 class Virus extends Obstacle {
   constructor(danger) {
     super(danger);
-    this.img.src = "./imgages/virus.png";
+    this.danger = true;
+    this.img.src = "./images/virus.png";
   }
 }
 function createVirus() {
-  if (gameFrames % 160 === 0) {
-    viruses.push(new Virus(true));
+  if (gameFrames % 180 === 0) {
+    viruses.push(new Virus());
   }
 }
-function updateMasks() {
+function updateVirus() {
   for (let i = 0; i < viruses.length; i++) {
-    viruses[i].x += viruses[i].vy;
+    viruses[i].x += viruses[i].vx;
     viruses[i].draw();
   }
 }
