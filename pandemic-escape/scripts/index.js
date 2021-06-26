@@ -87,7 +87,7 @@ let testPosition = (player, obstacleArr) => {
     ) {
       position;
     } else {
-      position = obstacleArr[i];
+      position = i;
     }
   }
   return position;
@@ -97,11 +97,10 @@ let testPosition = (player, obstacleArr) => {
 
 function testDangerOne(player, obstacleArr) {
   let position = testPosition(player, obstacleArr);
-  // splice array an der Position
-  
+  obstacleArr.splice(position, 1);
 
   if (position.danger = true) {
-    updateLivesOne();
+    updateLives();
   } else if (position.danger = false) {
     updateCounter();
   }
@@ -297,9 +296,10 @@ function startLevelOne() {
 // let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
+  let level = 2;
   // Timer One
   const timerTwo = document.querySelector("#timerTwo");
-  initializeTimer(60, timerTwo);
+  initializeTimer(60, timerTwo, level);
 
   const counterTwo = document.querySelector("#counterTwo");
   initializeCounter(0, counterTwo);
