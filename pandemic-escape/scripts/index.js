@@ -95,7 +95,7 @@ let testPosition = (player, obstacleArr) => {
 
 // Test Danger Level One
 
-function testDangerOne(player, obstacleArr) {
+function testDanger(player, obstacleArr) {
   let position = testPosition(player, obstacleArr);
   obstacleArr.splice(position, 1);
 
