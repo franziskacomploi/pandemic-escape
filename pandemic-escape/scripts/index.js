@@ -116,7 +116,7 @@ let testPosition = (player, obstacleArr) => {
     ) {
       position;
     } else {
-      position = i;
+      position = obstacleArr[i];
     }
   }
   return position;
@@ -126,7 +126,8 @@ let testPosition = (player, obstacleArr) => {
 
 function testDanger(player, obstacleArr) {
   let position = testPosition(player, obstacleArr);
-  obstacleArr.splice(position, 1);
+  let positionNumber = obstacleArr.indexOf(position);
+  obstacleArr.splice(positionNumber, 1);
 
   if (position.danger = true) {
     updateLives();
