@@ -63,6 +63,36 @@ function updateCounter(count, counterDiv) {
   counterDiv.innerHTML = `You have: ${count} points.`;
 }
 
+// Test Position of Player and Obstacle
+
+let testPosition = (player, obstacleArr) => {
+  let playerleft = player.x;
+  let playertop = player.y;
+  let playerright = player.x + player.width;
+  let playerbottom = player.y + player.height;
+
+  for (let i = 0; i < obstacleArr.length; i++) {
+    let obsleft = obstacleArr[i].x;
+    let obstop = obstacleArr[i].y;
+    let obsright = obstacleArr[i].x + obstacleArr[i].width;
+    let obsbottom = obstacleArr[i].y + obstacleArr[i].height;
+
+      return !(
+          playerleft > obsright ||
+          playertop > obsbottom ||
+          playerright < obsleft ||
+          playerbottom < obstop
+      );
+}}
+
+// Test Danger of Obstacle
+
+function testDanger() {
+
+}
+
+
+
 // Level One
 
 const canvasOne = document.getElementById("levelOneCanvas");
