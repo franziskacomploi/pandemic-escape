@@ -32,14 +32,33 @@ function initializeLives(lives, livesDiv) {
   livesDiv.innerHTML = `You have ${hearts} left.`;
 }
 
-function updateLivesOne(lives, livesDiv) {
+function updateLives(lives, livesDiv) {
   lives--;
   livesDiv.innerHTML = `You have ${lives} left.`;
 }
 
 // Timer Function
+function switchToInfoTwo(){
+  document.getElementById("levelOne").classList.add("hidden");
+  document.getElementById("infoTwo").classList.remove("hidden");
+}
+function switchToWin(){
+  document.getElementById("levelTwo").classList.add("hidden");
+  document.getElementById("win").classList.remove("hidden");
+}
 
-function initializeTimer(count, timerDiv) {
+// function stopLevelOne(intervalId, timerCount){
+//   if (timerCount == 0) {
+//     clearInterval(intervalId);
+//     setTimeout(switchToInfoTwo, 3000);
+//   }
+//   if (lives == 0) {
+//     document.getElementById("levelOne").classList.add("hidden");
+//     document.getElementById("gameOver").classList.remove("hidden");
+//   }
+// }
+
+function initializeTimer(count, timerDiv, level) {
   let timerCount = count;
   timerDiv.innerHTML = `${timerCount} seconds left`;
   const intervalId = setInterval(() => {
@@ -48,9 +67,19 @@ function initializeTimer(count, timerDiv) {
     if (timerCount == 0) {
       clearInterval(intervalId);
       timerDiv.innerHTML = `Time has run out!`;
+      console.log(level);
+      if (level == 1) {
+        setTimeout(switchToInfoTwo, 3000);
+      } else {
+        setTimeout(switchToWin, 3000);
+      }
     }
   }, 1000);
+  return timerCount;
 }
+
+
+
 
 // Counter Function
 
@@ -205,9 +234,10 @@ document.onkeydown = function (e) {
 
 // Start Game
 function startLevelOne() {
+  let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
-  initializeTimer(60, timerOne);
+  let timerCount = initializeTimer(10, timerOne, level);
 
   // Counter One
   const counterOne = document.querySelector("#counterOne");
@@ -218,7 +248,7 @@ function startLevelOne() {
   initializeLives(3, livesOne);
 
   // Playground
-  setInterval(() => {
+  let intervalIdOne = setInterval(() => {
     ctxOne.clearRect(0, 0, 700, 500);
 
     // Background
@@ -236,6 +266,7 @@ function startLevelOne() {
 
     gameFrames++;
   }, 20);
+ 
 }
 
 
