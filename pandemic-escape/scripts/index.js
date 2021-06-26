@@ -92,6 +92,49 @@ function updateCounter(count, counterDiv) {
   counterDiv.innerHTML = `You have: ${count} points.`;
 }
 
+// Test Position of Player and Obstacle
+
+let testPosition = (player, obstacleArr) => {
+  let playerleft = player.x;
+  let playertop = player.y;
+  let playerright = player.x + player.width;
+  let playerbottom = player.y + player.height;
+
+  let position;
+
+  for (let i = 0; i < obstacleArr.length; i++) {
+    let obsleft = obstacleArr[i].x;
+    let obstop = obstacleArr[i].y;
+    let obsright = obstacleArr[i].x + obstacleArr[i].width;
+    let obsbottom = obstacleArr[i].y + obstacleArr[i].height;
+
+    if (
+      playerleft > obsright ||
+      playertop > obsbottom ||
+      playerright < obsleft ||
+      playerbottom < obstop
+    ) {
+      position;
+    } else {
+      position = i;
+    }
+  }
+  return position;
+};
+
+// Test Danger Level One
+
+function testDanger(player, obstacleArr) {
+  let position = testPosition(player, obstacleArr);
+  obstacleArr.splice(position, 1);
+
+  if (position.danger = true) {
+    updateLives();
+  } else if (position.danger = false) {
+    updateCounter();
+  }
+}
+
 // Level One
 
 const canvasOne = document.getElementById("levelOneCanvas");
@@ -153,7 +196,7 @@ class Obstacle {
     this.danger = danger;
   }
   draw() {
-      ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -269,7 +312,6 @@ function startLevelOne() {
  
 }
 
-
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
 
@@ -285,9 +327,10 @@ function startLevelOne() {
 // let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
+  let level = 2;
   // Timer One
   const timerTwo = document.querySelector("#timerTwo");
-  initializeTimer(60, timerTwo);
+  initializeTimer(60, timerTwo, level);
 
   const counterTwo = document.querySelector("#counterTwo");
   initializeCounter(0, counterTwo);
