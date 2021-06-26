@@ -329,10 +329,11 @@ function startLevelOne() {
 
 function startLevelTwo() {
   let level = 2;
-  // Timer One
+  // Timer
   const timerTwo = document.querySelector("#timerTwo");
   initializeTimer(60, timerTwo, level);
 
+  // Counter
   const counterTwo = document.querySelector("#counterTwo");
   initializeCounter(0, counterTwo);
 
