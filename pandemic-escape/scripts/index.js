@@ -122,7 +122,7 @@ let testPosition = (player, obstacleArr) => {
   return position;
 };
 
-// Test Danger Level One
+// Test Danger 
 
 function testDanger(player, obstacleArr) {
   let position = testPosition(player, obstacleArr);
