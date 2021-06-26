@@ -71,27 +71,41 @@ let testPosition = (player, obstacleArr) => {
   let playerright = player.x + player.width;
   let playerbottom = player.y + player.height;
 
+  let position;
+
   for (let i = 0; i < obstacleArr.length; i++) {
     let obsleft = obstacleArr[i].x;
     let obstop = obstacleArr[i].y;
     let obsright = obstacleArr[i].x + obstacleArr[i].width;
     let obsbottom = obstacleArr[i].y + obstacleArr[i].height;
 
-      return !(
-          playerleft > obsright ||
-          playertop > obsbottom ||
-          playerright < obsleft ||
-          playerbottom < obstop
-      );
-}}
+    if (
+      playerleft > obsright ||
+      playertop > obsbottom ||
+      playerright < obsleft ||
+      playerbottom < obstop
+    ) {
+      position;
+    } else {
+      position = obstacleArr[i];
+    }
+  }
+  return position;
+};
 
-// Test Danger of Obstacle
+// Test Danger Level One
 
-function testDanger() {
+function testDangerOne(player, obstacleArr) {
+  let position = testPosition(player, obstacleArr);
+  // splice array an der Position
+  
 
+  if (position.danger = true) {
+    updateLivesOne();
+  } else if (position.danger = false) {
+    updateCounter();
+  }
 }
-
-
 
 // Level One
 
@@ -154,7 +168,7 @@ class Obstacle {
     this.danger = danger;
   }
   draw() {
-      ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -267,7 +281,6 @@ function startLevelOne() {
     gameFrames++;
   }, 20);
 }
-
 
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
