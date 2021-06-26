@@ -238,14 +238,9 @@ function startLevelOne() {
   }, 20);
 }
 
-// Class Counterpart = Masks, Virus
-// "Obstacles" = Virus --> How do they move?
-// "Points" = Masks
-// Start Game Function Game Logic (collect points etc.)
 
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
 // Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
-// Add "You collected XX masks in infoScreenTwo"
 
 // Level Two
 // Info Screen Two
@@ -282,5 +277,6 @@ function startLevelTwo() {
 
 // You loose = Section mit class hidden
 
-// You won! = Section mit class hidden - add "You collected XX masks!"
+// You won! = Section mit class hidden
+// Add "You collected XX masks."
 // Highscore for Mask Points
