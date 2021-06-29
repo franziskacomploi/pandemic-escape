@@ -69,13 +69,23 @@ function initializeTimer(count, timerDiv, level) {
       timerDiv.innerHTML = `Time has run out!`;
       console.log(level);
       if (level == 1) {
-        setTimeout(switchToInfoTwo, 3000);
+        timerRunOut = 0;
+        setTimeout(switchToInfoTwo, 4000);
       } else {
-        setTimeout(switchToWin, 3000);
+        setTimeout(switchToWin, 4000);
       }
     }
   }, 1000);
   return timerCount;
+}
+
+// Timer Run Out 
+
+function timeRunOut(interval) {
+if (timerRunOut == 0) {
+  clearInterval(interval);
+  
+}
 }
 
 
@@ -247,6 +257,7 @@ function updateVirus() {
 }
 
 let gameFrames = 0;
+let timerRunOut = 1;
 
 // Keys
 document.onkeydown = function (e) {
@@ -308,8 +319,10 @@ function startLevelOne() {
     createVirus();
     updateVirus();
 
+    timeRunOut(intervalIdOne);
     gameFrames++;
   }, 20);
+
  
 }
 
