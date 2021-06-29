@@ -32,31 +32,19 @@ function initializeLives(lives, livesDiv) {
   livesDiv.innerHTML = `You have ${hearts} left.`;
 }
 
-function updateLives(lives, livesDiv) {
+function updateLives() {
   lives--;
-  livesDiv.innerHTML = `You have ${lives} left.`;
 }
 
 // Timer Function
-function switchToInfoTwo(){
+function switchToInfoTwo() {
   document.getElementById("levelOne").classList.add("hidden");
   document.getElementById("infoTwo").classList.remove("hidden");
 }
-function switchToWin(){
+function switchToWin() {
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
 }
-
-// function stopLevelOne(intervalId, timerCount){
-//   if (timerCount == 0) {
-//     clearInterval(intervalId);
-//     setTimeout(switchToInfoTwo, 3000);
-//   }
-//   if (lives == 0) {
-//     document.getElementById("levelOne").classList.add("hidden");
-//     document.getElementById("gameOver").classList.remove("hidden");
-//   }
-// }
 
 function initializeTimer(count, timerDiv, level) {
   let timerCount = count;
@@ -79,17 +67,13 @@ function initializeTimer(count, timerDiv, level) {
   return timerCount;
 }
 
-// Timer Run Out 
+// Timer Run Out
 
 function timeRunOut(interval) {
-if (timerRunOut == 0) {
-  clearInterval(interval);
-  
+  if (timerRunOut == 0) {
+    clearInterval(interval);
+  }
 }
-}
-
-
-
 
 // Counter Function
 
@@ -97,53 +81,47 @@ function initializeCounter(count, counterDiv) {
   counterDiv.innerHTML = `You have: ${count} points.`;
 }
 
-function updateCounter(count, counterDiv) {
-  count++;
-  counterDiv.innerHTML = `You have: ${count} points.`;
+function updateCounter() {
+  counterCount++;
 }
 
 // Test Position of Player and Obstacle
 
-let testPosition = (player, obstacleArr) => {
-  let playerleft = player.x;
-  let playertop = player.y;
-  let playerright = player.x + player.width;
-  let playerbottom = player.y + player.height;
 
-  let position;
-
-  for (let i = 0; i < obstacleArr.length; i++) {
-    let obsleft = obstacleArr[i].x;
-    let obstop = obstacleArr[i].y;
-    let obsright = obstacleArr[i].x + obstacleArr[i].width;
-    let obsbottom = obstacleArr[i].y + obstacleArr[i].height;
-
-    if (
-      playerleft > obsright ||
-      playertop > obsbottom ||
-      playerright < obsleft ||
-      playerbottom < obstop
-    ) {
-      position;
-    } else {
-      position = obstacleArr[i];
-    }
-  }
-  return position;
+let intersect = (obj1, obj2) => {
+  let obj1left = obj1.x;
+  let obj1top = obj1.y;
+  let obj1right = obj1.x + obj1.width;
+  let obj1bottom = obj1.y + obj1.height;
+  let obj2left = obj2.x;
+  let obj2top = obj2.y;
+  let obj2right = obj2.x + obj2.width;
+  let obj2bottom = obj2.y + obj2.height;
+  return !(
+      obj1left > obj2right ||
+      obj1top > obj2bottom ||
+      obj1right < obj2left ||
+      obj1bottom < obj2top
+  );
 };
 
-// Test Danger 
+// Test Danger
 
 function testDanger(player, obstacleArr) {
-  let position = testPosition(player, obstacleArr);
-  let positionNumber = obstacleArr.indexOf(position);
-  obstacleArr.splice(positionNumber, 1);
 
-  if (position.danger = true) {
-    updateLives();
-  } else if (position.danger = false) {
-    updateCounter();
+  for (let i = 0; i < obstacleArr.length; i++) {
+    if (intersect(player, obstacleArr[i])) {
+      let theOneObstacle = obstacleArr.splice(i, 1)[0]
+      if (theOneObstacle.danger == true) {
+      updateLives();
+      console.log("danger");
+    } else if (theOneObstacle.danger == false) {
+      updateCounter();
+      console.log("no danger");
+    }
+    }
   }
+
 }
 
 // Level One
@@ -197,14 +175,14 @@ let player = new Player(0, 240);
 
 // Obstacle
 class Obstacle {
-  constructor(danger) {
+  constructor() {
     this.x = 700;
     this.y = Math.floor(Math.random() * 500);
     this.vx = -4;
     this.width = 60;
     this.height = 60;
     this.img = new Image();
-    this.danger = danger;
+    this.danger = false;
   }
   draw() {
     ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -215,8 +193,8 @@ class Obstacle {
 let masks = [];
 
 class Mask extends Obstacle {
-  constructor(danger) {
-    super(danger);
+  constructor() {
+    super();
     this.danger = false;
     this.img.src = "./images/mask.png";
   }
@@ -237,8 +215,8 @@ function updateMasks() {
 let viruses = [];
 
 class Virus extends Obstacle {
-  constructor(danger) {
-    super(danger);
+  constructor() {
+    super();
     this.danger = true;
     this.img.src = "./images/virus.png";
     this.vx = -6;
@@ -258,6 +236,8 @@ function updateVirus() {
 
 let gameFrames = 0;
 let timerRunOut = 1;
+let lives = 3;
+let counterCount = 0;
 
 // Keys
 document.onkeydown = function (e) {
@@ -295,17 +275,18 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeTimer(10, timerOne, level);
 
-  // Counter One
-  const counterOne = document.querySelector("#counterOne");
-  initializeCounter(0, counterOne);
-
-  // Lives Level One
-  const livesOne = document.querySelector("#livesOne");
-  initializeLives(3, livesOne);
 
   // Playground
   let intervalIdOne = setInterval(() => {
     ctxOne.clearRect(0, 0, 700, 500);
+
+  // Counter One
+  const counterOne = document.querySelector("#counterOne");
+  initializeCounter(counterCount, counterOne);
+
+  // Lives Level One
+  const livesOne = document.querySelector("#livesOne");
+  initializeLives(lives, livesOne);
 
     // Background
     bg.move();
@@ -320,11 +301,12 @@ function startLevelOne() {
     createVirus();
     updateVirus();
 
+    testDanger(player, masks);
+    testDanger(player, viruses);
+
     timeRunOut(intervalIdOne);
     gameFrames++;
   }, 20);
-
- 
 }
 
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
