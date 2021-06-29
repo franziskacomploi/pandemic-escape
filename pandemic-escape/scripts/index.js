@@ -65,6 +65,10 @@ function initializeTimer(count, timerDiv, level) {
   return timerCount;
 }
 
+function startTimer(count, timerDiv) {
+  timerDiv.innerHTML = `You start at ${count} seconds.`;
+}
+
 // Timer Run Out
 
 function timeRunOut(interval) {
@@ -268,14 +272,16 @@ document.onkeydown = function (e) {
 function startLevelOne() {
 
 
-
-
-
   let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
-  initializeTimer(10, timerOne, level);
+  initializeCounter(counterCount, counterOne);
+  initializeLives(lives, livesOne);
+ startTimer(10, timerOne);
 
+
+  setTimeout(function() {
+    initializeTimer(10, timerOne, level);
 
   // Playground
   let intervalIdOne = setInterval(() => {
@@ -308,6 +314,13 @@ function startLevelOne() {
     timeRunOut(intervalIdOne);
     gameFrames++
   }, 20);
+  
+  }, 3000);
+
+  bg.drawBg();
+  player.drawPlayer();
+
+
 }
 
 
