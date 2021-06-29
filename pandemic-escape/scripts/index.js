@@ -82,7 +82,7 @@ function initializeCounter(count, counterDiv) {
 }
 
 function updateCounter() {
-  count++;
+  counterCount++;
 }
 
 // Test Position of Player and Obstacle
@@ -237,7 +237,7 @@ function updateVirus() {
 let gameFrames = 0;
 let timerRunOut = 1;
 let lives = 3;
-let count = 0;
+let counterCount = 0;
 
 // Keys
 document.onkeydown = function (e) {
@@ -275,17 +275,18 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeTimer(10, timerOne, level);
 
-  // Counter One
-  const counterOne = document.querySelector("#counterOne");
-  initializeCounter(0, counterOne);
-
-  // Lives Level One
-  const livesOne = document.querySelector("#livesOne");
-  initializeLives(lives, livesOne);
 
   // Playground
   let intervalIdOne = setInterval(() => {
     ctxOne.clearRect(0, 0, 700, 500);
+
+  // Counter One
+  const counterOne = document.querySelector("#counterOne");
+  initializeCounter(counterCount, counterOne);
+
+  // Lives Level One
+  const livesOne = document.querySelector("#livesOne");
+  initializeLives(lives, livesOne);
 
     // Background
     bg.move();
