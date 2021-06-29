@@ -10,7 +10,6 @@ document.querySelector(".startButton").addEventListener("click", () => {
 document.querySelector(".infoOneButton").addEventListener("click", () => {
   document.getElementById("infoOne").classList.add("hidden");
   document.getElementById("levelOne").classList.remove("hidden");
-  // eventually Countdown to startGame
   startLevelOne();
 });
 
@@ -38,6 +37,7 @@ function updateLives(lives, livesDiv) {
 }
 
 // Timer Function
+
 function switchToInfoTwo(){
   document.getElementById("levelOne").classList.add("hidden");
   document.getElementById("infoTwo").classList.remove("hidden");
@@ -46,17 +46,6 @@ function switchToWin(){
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
 }
-
-// function stopLevelOne(intervalId, timerCount){
-//   if (timerCount == 0) {
-//     clearInterval(intervalId);
-//     setTimeout(switchToInfoTwo, 3000);
-//   }
-//   if (lives == 0) {
-//     document.getElementById("levelOne").classList.add("hidden");
-//     document.getElementById("gameOver").classList.remove("hidden");
-//   }
-// }
 
 function initializeTimer(count, timerDiv, level) {
   let timerCount = count;
@@ -67,7 +56,6 @@ function initializeTimer(count, timerDiv, level) {
     if (timerCount == 0) {
       clearInterval(intervalId);
       timerDiv.innerHTML = `Time has run out!`;
-      console.log(level);
       if (level == 1) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
@@ -82,14 +70,10 @@ function initializeTimer(count, timerDiv, level) {
 // Timer Run Out 
 
 function timeRunOut(interval) {
-if (timerRunOut == 0) {
-  clearInterval(interval);
-  
+  if (timerRunOut == 0) {
+    clearInterval(interval);  
+  }
 }
-}
-
-
-
 
 // Counter Function
 
@@ -213,7 +197,6 @@ class Obstacle {
 
 // Mask
 let masks = [];
-
 class Mask extends Obstacle {
   constructor(danger) {
     super(danger);
@@ -235,7 +218,6 @@ function updateMasks() {
 
 // Virus
 let viruses = [];
-
 class Virus extends Obstacle {
   constructor(danger) {
     super(danger);
@@ -290,6 +272,11 @@ document.onkeydown = function (e) {
 
 // Start Game
 function startLevelOne() {
+
+
+
+
+
   let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
@@ -304,6 +291,11 @@ function startLevelOne() {
   initializeLives(3, livesOne);
 
   // Playground
+
+ 
+
+
+
   let intervalIdOne = setInterval(() => {
     ctxOne.clearRect(0, 0, 700, 500);
 
@@ -321,14 +313,18 @@ function startLevelOne() {
     updateVirus();
 
     timeRunOut(intervalIdOne);
-    gameFrames++;
+    gameFrames++
   }, 20);
 
- 
+
+
+
 }
 
+
+
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
-// Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
+
 
 // Level Two
 // Info Screen Two
