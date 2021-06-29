@@ -274,6 +274,7 @@ document.onkeydown = function (e) {
       player.y += 20;
     }
   }
+  event.preventDefault();
 };
 
 // Start Game
