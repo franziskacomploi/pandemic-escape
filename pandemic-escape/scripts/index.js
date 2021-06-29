@@ -10,7 +10,6 @@ document.querySelector(".startButton").addEventListener("click", () => {
 document.querySelector(".infoOneButton").addEventListener("click", () => {
   document.getElementById("infoOne").classList.add("hidden");
   document.getElementById("levelOne").classList.remove("hidden");
-  // eventually Countdown to startGame
   startLevelOne();
 });
 
@@ -55,7 +54,6 @@ function initializeTimer(count, timerDiv, level) {
     if (timerCount == 0) {
       clearInterval(intervalId);
       timerDiv.innerHTML = `Time has run out!`;
-      console.log(level);
       if (level == 1) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
@@ -65,6 +63,10 @@ function initializeTimer(count, timerDiv, level) {
     }
   }, 1000);
   return timerCount;
+}
+
+function startTimer(count, timerDiv) {
+  timerDiv.innerHTML = `You start at ${count} seconds.`;
 }
 
 // Timer Run Out
@@ -191,7 +193,6 @@ class Obstacle {
 
 // Mask
 let masks = [];
-
 class Mask extends Obstacle {
   constructor() {
     super();
@@ -213,7 +214,6 @@ function updateMasks() {
 
 // Virus
 let viruses = [];
-
 class Virus extends Obstacle {
   constructor() {
     super();
@@ -270,11 +270,18 @@ document.onkeydown = function (e) {
 
 // Start Game
 function startLevelOne() {
+
+
   let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
-  initializeTimer(10, timerOne, level);
+  initializeCounter(counterCount, counterOne);
+  initializeLives(lives, livesOne);
+ startTimer(10, timerOne);
 
+
+  setTimeout(function() {
+    initializeTimer(10, timerOne, level);
 
   // Playground
   let intervalIdOne = setInterval(() => {
@@ -305,12 +312,21 @@ function startLevelOne() {
     testDanger(player, viruses);
 
     timeRunOut(intervalIdOne);
-    gameFrames++;
+    gameFrames++
   }, 20);
+  
+  }, 3000);
+
+  bg.drawBg();
+  player.drawPlayer();
+
+
 }
 
+
+
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
-// Add Class Hidden to Level One to get to Info Screen Two - You loose or next level? = Section mit class hidden
+
 
 // Level Two
 // Info Screen Two
