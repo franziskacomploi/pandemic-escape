@@ -281,7 +281,7 @@ function startLevelOne() {
   let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
-  let timerCount = initializeTimer(10, timerOne, level);
+  initializeTimer(10, timerOne, level);
 
   // Counter One
   const counterOne = document.querySelector("#counterOne");
