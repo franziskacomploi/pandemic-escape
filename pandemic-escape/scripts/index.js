@@ -342,8 +342,6 @@ function startLevelOne() {
   player.drawPlayer();
 }
 
-// Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
-
 // Level Two
 // Info Screen Two
 
@@ -362,7 +360,7 @@ const canvasTwo = document.getElementById("levelTwoCanvas");
 let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
-  let level = 2;
+   level = 2;
 
 
   // Timer
@@ -372,7 +370,7 @@ function startLevelTwo() {
   startTimer(60, timerTwo);
 
 setTimeout(() => {
-  setInterval(() => {
+let intervalIdTwo = setInterval(() => {
 
   initializeTimer(60, timerTwo);
 
@@ -386,7 +384,9 @@ setTimeout(() => {
 
 
 
-
+  
+  timeRunOut(intervalIdTwo);
+  gameFrames++;
   },20)
 
 }, 3000);
