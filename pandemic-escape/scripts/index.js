@@ -20,7 +20,19 @@ document.querySelector(".infoTwoButton").addEventListener("click", () => {
   document.getElementById("levelTwo").classList.remove("hidden");
 });
 
+// Game Over Screen
+
+document.querySelector(".gameOverButton").addEventListener("click", () => {
+  document.getElementById("gameOver").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+});
+
+
 // Lives Function
+function switchToGameOver() {
+  document.getElementById("levelOne").classList.add("hidden");
+  document.getElementById("gameOver").classList.remove("hidden");
+} 
 
 function initializeLives(lives, livesDiv) {
   const heartsArr = [];
@@ -29,6 +41,9 @@ function initializeLives(lives, livesDiv) {
   }
   let hearts = heartsArr.join(" ");
   livesDiv.innerHTML = `You have ${hearts} left.`;
+  if (heartsArr.length == 0) {
+    switchToGameOver();
+  }
 }
 
 function updateLives() {
@@ -277,11 +292,11 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
   initializeLives(lives, livesOne);
- startTimer(10, timerOne);
+ startTimer(20, timerOne);
 
 
   setTimeout(function() {
-    initializeTimer(10, timerOne, level);
+    initializeTimer(20, timerOne, level);
 
   // Playground
   let intervalIdOne = setInterval(() => {
