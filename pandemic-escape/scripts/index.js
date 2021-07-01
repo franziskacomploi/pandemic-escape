@@ -363,9 +363,10 @@ function startLevelTwo() {
   startTimer(60, timerTwo);
 
 setTimeout(() => {
-let intervalIdTwo = setInterval(() => {
 
   initializeTimer(60, timerTwo);
+
+let intervalIdTwo = setInterval(() => {
 
   // Counter
   const counterTwo = document.querySelector("#counterTwo");
