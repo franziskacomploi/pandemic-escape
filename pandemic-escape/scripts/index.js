@@ -10,6 +10,13 @@ document.querySelector(".startButton").addEventListener("click", () => {
 document.querySelector(".infoOneButton").addEventListener("click", () => {
   document.getElementById("infoOne").classList.add("hidden");
   document.getElementById("levelOne").classList.remove("hidden");
+  gameFrames = 0;
+  timerRunOut = 1;
+  lives = 3;
+  counterCount = 0;
+
+  player.resetPlayer(0,240);
+
   startLevelOne();
 });
 
@@ -27,12 +34,12 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
   document.getElementById("home").classList.remove("hidden");
 });
 
-
 // Lives Function
 function switchToGameOver() {
   document.getElementById("levelOne").classList.add("hidden");
   document.getElementById("gameOver").classList.remove("hidden");
-} 
+  timerRunOut = 0;
+}
 
 function initializeLives(lives, livesDiv) {
   const heartsArr = [];
@@ -69,12 +76,18 @@ function initializeTimer(count, timerDiv, level) {
     if (timerCount == 0) {
       clearInterval(intervalId);
       timerDiv.innerHTML = `Time has run out!`;
-      if (level == 1) {
+
+      if (!document.getElementById("levelOne").classList.contains("hidden")) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
-      } else {
-        setTimeout(switchToWin, 4000);
       }
+
+      // if (level == 1 && !document.getElementById('gameOver').classList.contains("hidden")) {
+      //   timerRunOut = 0;
+      //   setTimeout(switchToInfoTwo, 4000);
+      // } else if (level == 2 && !document.getElementById('gameOver').classList.contains('hidden')) {
+      //   setTimeout(switchToWin, 4000);
+      // }
     }
   }, 1000);
   return timerCount;
@@ -104,7 +117,6 @@ function updateCounter() {
 
 // Test Position of Player and Obstacle
 
-
 let intersect = (obj1, obj2) => {
   let obj1left = obj1.x;
   let obj1top = obj1.y;
@@ -115,30 +127,28 @@ let intersect = (obj1, obj2) => {
   let obj2right = obj2.x + obj2.width;
   let obj2bottom = obj2.y + obj2.height;
   return !(
-      obj1left > obj2right ||
-      obj1top > obj2bottom ||
-      obj1right < obj2left ||
-      obj1bottom < obj2top
+    obj1left > obj2right ||
+    obj1top > obj2bottom ||
+    obj1right < obj2left ||
+    obj1bottom < obj2top
   );
 };
 
 // Test Danger
 
 function testDanger(player, obstacleArr) {
-
   for (let i = 0; i < obstacleArr.length; i++) {
     if (intersect(player, obstacleArr[i])) {
-      let theOneObstacle = obstacleArr.splice(i, 1)[0]
+      let theOneObstacle = obstacleArr.splice(i, 1)[0];
       if (theOneObstacle.danger == true) {
-      updateLives();
-      console.log("danger");
-    } else if (theOneObstacle.danger == false) {
-      updateCounter();
-      console.log("no danger");
-    }
+        updateLives();
+        console.log("danger");
+      } else if (theOneObstacle.danger == false) {
+        updateCounter();
+        console.log("no danger");
+      }
     }
   }
-
 }
 
 // Level One
@@ -186,6 +196,11 @@ class Player {
   }
   drawPlayer() {
     ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  resetPlayer(x,y) {
+this.x = x;
+this.y = y;
   }
 }
 let player = new Player(0, 240);
@@ -285,63 +300,54 @@ document.onkeydown = function (e) {
 
 // Start Game
 function startLevelOne() {
-
-
   let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
   initializeLives(lives, livesOne);
- startTimer(20, timerOne);
+  startTimer(20, timerOne);
 
-
-  setTimeout(function() {
+  setTimeout(function () {
     initializeTimer(20, timerOne, level);
 
-  // Playground
-  let intervalIdOne = setInterval(() => {
-    ctxOne.clearRect(0, 0, 700, 500);
+    // Playground
+    let intervalIdOne = setInterval(() => {
+      ctxOne.clearRect(0, 0, 700, 500);
 
-  // Counter One
-  const counterOne = document.querySelector("#counterOne");
-  initializeCounter(counterCount, counterOne);
+      // Counter One
+      const counterOne = document.querySelector("#counterOne");
+      initializeCounter(counterCount, counterOne);
 
-  // Lives Level One
-  const livesOne = document.querySelector("#livesOne");
-  initializeLives(lives, livesOne);
+      // Lives Level One
+      const livesOne = document.querySelector("#livesOne");
+      initializeLives(lives, livesOne);
 
-    // Background
-    bg.move();
-    bg.drawBg();
+      // Background
+      bg.move();
+      bg.drawBg();
 
-    // Player Image
-    player.drawPlayer();
+      // Player Image
+      player.drawPlayer();
 
-    createMasks();
-    updateMasks();
+      createMasks();
+      updateMasks();
 
-    createVirus();
-    updateVirus();
+      createVirus();
+      updateVirus();
 
-    testDanger(player, masks);
-    testDanger(player, viruses);
+      testDanger(player, masks);
+      testDanger(player, viruses);
 
-    timeRunOut(intervalIdOne);
-    gameFrames++
-  }, 20);
-  
+      timeRunOut(intervalIdOne);
+      gameFrames++;
+    }, 20);
   }, 3000);
 
   bg.drawBg();
   player.drawPlayer();
-
-
 }
 
-
-
 // Set Timeout 3 seconds needed where nothing in the game moves anymore, before going to inofScreentwo
-
 
 // Level Two
 // Info Screen Two
