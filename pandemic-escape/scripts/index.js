@@ -80,14 +80,9 @@ function initializeTimer(count, timerDiv, level) {
       if (!document.getElementById("levelOne").classList.contains("hidden")) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
+      } else if (!document.getElementById("levelTwo").classList.contains("hidden")) {
+        setTimeout(switchToWin, 4000);
       }
-
-      // if (level == 1 && !document.getElementById('gameOver').classList.contains("hidden")) {
-      //   timerRunOut = 0;
-      //   setTimeout(switchToInfoTwo, 4000);
-      // } else if (level == 2 && !document.getElementById('gameOver').classList.contains('hidden')) {
-      //   setTimeout(switchToWin, 4000);
-      // }
     }
   }, 1000);
   return timerCount;
@@ -352,13 +347,13 @@ function startLevelOne() {
 // Level Two
 // Info Screen Two
 
-// document.querySelector(".infoTwoButton").addEventListener('click', () => {
-//     document.getElementById('infoTwo').classList.add('hidden');
-//     document.getElementById('levelTwo').classList.remove('hidden');
-// })
+document.querySelector(".infoTwoButton").addEventListener('click', () => {
+    document.getElementById('infoTwo').classList.add('hidden');
+    document.getElementById('levelTwo').classList.remove('hidden');
+})
 
-// const canvasTwo = document.getElementById("levelTwoCanvas");
-// let ctxTwo = canvasTwo.getContext("2d");
+const canvasTwo = document.getElementById("levelTwoCanvas");
+let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
   let level = 2;
