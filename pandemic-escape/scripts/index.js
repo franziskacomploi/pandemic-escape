@@ -350,6 +350,12 @@ function startLevelOne() {
 document.querySelector(".infoTwoButton").addEventListener('click', () => {
     document.getElementById('infoTwo').classList.add('hidden');
     document.getElementById('levelTwo').classList.remove('hidden');
+
+    gameFrames = 0;
+    timerRunOut = 1;
+    lives = 3;
+  
+    startLevelTwo();
 })
 
 const canvasTwo = document.getElementById("levelTwoCanvas");
@@ -357,17 +363,34 @@ let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
   let level = 2;
+
+
   // Timer
   const timerTwo = document.querySelector("#timerTwo");
-  initializeTimer(60, timerTwo, level);
+  initializeCounter(counterCount, counterTwo);
+  initializeLives(lives, livesTwo);
+  startTimer(60, timerTwo);
+
+setTimeout(() => {
+  setInterval(() => {
+
+  initializeTimer(60, timerTwo);
 
   // Counter
   const counterTwo = document.querySelector("#counterTwo");
-  initializeCounter(0, counterTwo);
+  initializeCounter(counterCount, counterTwo);
 
   // Lives Level Two
   const livesTwo = document.querySelector("#livesTwo");
-  initializeLives(3, livesTwo);
+  initializeLives(lives, livesTwo);
+
+
+
+
+  },20)
+
+}, 3000);
+
 }
 
 // Canvas
