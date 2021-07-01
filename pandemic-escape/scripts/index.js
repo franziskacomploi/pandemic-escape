@@ -349,8 +349,6 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     startLevelTwo();
 })
 
-const canvasTwo = document.getElementById("levelTwoCanvas");
-let ctxTwo = canvasTwo.getContext("2d");
 
 function startLevelTwo() {
    level = 2;
