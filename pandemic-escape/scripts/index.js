@@ -20,13 +20,6 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   startLevelOne();
 });
 
-// Info Screen Two
-
-document.querySelector(".infoTwoButton").addEventListener("click", () => {
-  document.getElementById("infoTwo").classList.add("hidden");
-  document.getElementById("levelTwo").classList.remove("hidden");
-});
-
 // Game Over Screen
 
 document.querySelector(".gameOverButton").addEventListener("click", () => {
