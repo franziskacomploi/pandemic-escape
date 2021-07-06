@@ -225,7 +225,8 @@ let playerOne = new Player(0, 240, ctxOne, imgPlayerOne);
 
 // Obstacle
 class Obstacle {
-  constructor() {
+  constructor(ctx) {
+    this.ctx = ctx;
     this.x = 700;
     this.y = Math.floor(Math.random() * 500);
     this.vx = -4;
@@ -236,7 +237,7 @@ class Obstacle {
   }
 
   draw() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -251,7 +252,8 @@ class Mask extends Obstacle {
 }
 function createMasks() {
   if (gameFrames % 180 === 0) {
-    masks.push(new Mask());
+    masks.push(new Mask(ctxOne, imgMaskOne));
+
   }
 }
 function updateMasks() {
@@ -260,6 +262,8 @@ function updateMasks() {
     masks[i].draw();
   }
 }
+
+
 
 // // Injection
 // let injections = [];
@@ -421,6 +425,8 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     gameFrames = 0;
     timerRunOut = 1;
     lives = 3;
+    masks = [];
+    viruses = []
 
     startLevelTwo();
 })
