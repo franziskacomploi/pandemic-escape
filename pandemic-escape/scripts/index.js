@@ -156,40 +156,22 @@ document.onkeydown = function (e) {
   event.preventDefault();
 };
 
-// Level One
-
-document.querySelector(".infoOneButton").addEventListener("click", () => {
-  document.getElementById("infoOne").classList.add("hidden");
-  document.getElementById("levelOne").classList.remove("hidden");
-  gameFrames = 0;
-  timerRunOut = 1;
-  lives = 3;
-  counterCount = 0;
-
-  player.resetPlayer(0,240);
-
-  startLevelOne();
-});
-
-const canvasOne = document.getElementById("canvasOne");
-let ctxOne = canvasOne.getContext("2d");
-
 // Background
 class Background {
-  constructor(x, y) {
+  constructor(x, y, canvas, ctx, img) {
     this.x = x;
     this.y = y;
-    this.width = canvasOne.width;
-    this.height = canvasOne.height;
+    this.width = canvas.width;
+    this.height = canvas.height;
     this.img = new Image();
     this.img.src = "./images/playground.png";
     this.speed = -2;
   }
   drawBg() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
-    ctxOne.drawImage(
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctx.drawImage(
       this.img,
-      this.x + canvasOne.width,
+      this.x + canvas.width,
       this.y,
       this.width,
       this.height
@@ -197,7 +179,7 @@ class Background {
   }
   move() {
     this.x += this.speed;
-    this.x %= canvasOne.width;
+    this.x %= canvas.width;
   }
 }
 let bg = new Background(0, 0);
@@ -324,6 +306,29 @@ function updateVirus() {
 //     querdenker[i].drawTwo();
 //   }
 // }
+
+
+
+
+// Level One
+
+document.querySelector(".infoOneButton").addEventListener("click", () => {
+  document.getElementById("infoOne").classList.add("hidden");
+  document.getElementById("levelOne").classList.remove("hidden");
+  gameFrames = 0;
+  timerRunOut = 1;
+  lives = 3;
+  counterCount = 0;
+
+  player.resetPlayer(0,240);
+
+  startLevelOne();
+});
+
+const canvasOne = document.getElementById("canvasOne");
+let ctxOne = canvasOne.getContext("2d");
+
+
 
 
 let gameFrames = 0;
