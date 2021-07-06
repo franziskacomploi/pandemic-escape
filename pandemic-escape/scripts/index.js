@@ -244,8 +244,8 @@ class Obstacle {
 // Mask
 let masks = [];
 class Mask extends Obstacle {
-  constructor() {
-    super();
+  constructor(ctx) {
+    super(ctx);
     this.danger = false;
     this.img.src = "./images/mask.png";
   }
@@ -266,15 +266,15 @@ function updateMasks() {
 // Injection
 let injections = [];
 class Injection extends Obstacle {
-  constructor(){
-    super();
+  constructor(ctx){
+    super(ctx);
     this.danger = false;
     this.img.src = "./images/injection.png"
   }
 }
-function createInjections() {
+function createInjections(ctx) {
   if (gameFrames % 300 === 0) {
-    injections.push(new Injection());
+    injections.push(new Injection(ctx));
   }
 }
 function updateInjections() {
@@ -287,16 +287,16 @@ function updateInjections() {
 // Virus
 let viruses = [];
 class Virus extends Obstacle {
-  constructor() {
-    super();
+  constructor(ctx) {
+    super(ctx);
     this.danger = true;
     this.img.src = "./images/virus.png";
     this.vx = -6;
   }
 }
-function createVirus() {
+function createVirus(ctx) {
   if (gameFrames % 150 === 0) {
-    viruses.push(new Virus());
+    viruses.push(new Virus(ctx));
   }
 }
 function updateVirus() {
@@ -306,18 +306,19 @@ function updateVirus() {
   }
 }
 
-Querdenker 
+// Querdenker
+
 let querdenker = [];
 class Querdenker extends Obstacle {
-  constructor() {
-    super();
+  constructor(ctx) {
+    super(ctx);
     this.danger = true;
     this.img.src = "./images/querdenker.png";
   }
 }
-function createQuerdenker() {
+function createQuerdenker(ctx) {
   if (gameFrames % 160 === 0) {
-    querdenker.push(new Querdenker());
+    querdenker.push(new Querdenker(ctx));
   }
 }
 function updateQuerdenker() {
@@ -395,7 +396,7 @@ function startLevelOne() {
       createMasks(ctxOne);
       updateMasks();
 
-      createVirus();
+      createVirus(ctxOne);
       updateVirus();
 
       testDanger(playerOne, masks);
