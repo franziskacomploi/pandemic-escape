@@ -16,6 +16,15 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
   document.getElementById("home").classList.remove("hidden");
 });
 
+function switchToInfoTwo() {
+  document.getElementById("levelOne").classList.add("hidden");
+  document.getElementById("infoTwo").classList.remove("hidden");
+}
+function switchToWin() {
+  document.getElementById("levelTwo").classList.add("hidden");
+  document.getElementById("win").classList.remove("hidden");
+}
+
 // Level one Canvas
 
 const canvasOne = document.getElementById("canvasOne");
@@ -58,15 +67,6 @@ function updateLives() {
 }
 
 // Timer Function
-
-function switchToInfoTwo() {
-  document.getElementById("levelOne").classList.add("hidden");
-  document.getElementById("infoTwo").classList.remove("hidden");
-}
-function switchToWin() {
-  document.getElementById("levelTwo").classList.add("hidden");
-  document.getElementById("win").classList.remove("hidden");
-}
 
 function initializeTimer(count, timerDiv) {
   let timerCount = count;
