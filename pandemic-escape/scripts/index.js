@@ -274,6 +274,7 @@ class Injection extends Obstacle {
     super(ctx);
     this.danger = false;
     this.img.src = "./images/injection.png"
+    this.vx = -2;
   }
 }
 function createInjections(ctx) {
@@ -318,6 +319,7 @@ class Querdenker extends Obstacle {
     super(ctx);
     this.danger = true;
     this.img.src = "./images/querdenker.png";
+    this.vx = -8;
   }
 }
 function createQuerdenker(ctx) {
