@@ -12,6 +12,18 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
   document.getElementById("home").classList.remove("hidden");
 });
 
+// Level one Canvas
+
+const canvasOne = document.getElementById("canvasOne");
+let ctxOne = canvasOne.getContext("2d");
+
+
+
+// Level two Canvas 
+
+const canvasTwo = document.getElementById("canvasTwo");
+let ctxTwo = canvasTwo.getContext("2d");
+
 // Lives Function
 
 function switchToGameOver() {
@@ -159,19 +171,21 @@ document.onkeydown = function (e) {
 // Background
 class Background {
   constructor(x, y, canvas, ctx, img) {
+    this.canvas = canvas;
+    this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.width = canvas.width;
     this.height = canvas.height;
     this.img = new Image();
-    this.img.src = "./images/playground.png";
+    this.img.src = img;
     this.speed = -2;
   }
   drawBg() {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    ctx.drawImage(
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(
       this.img,
-      this.x + canvas.width,
+      this.x + this.canvas.width,
       this.y,
       this.width,
       this.height
@@ -179,10 +193,12 @@ class Background {
   }
   move() {
     this.x += this.speed;
-    this.x %= canvas.width;
+    this.x %= this.canvas.width;
   }
 }
-let bg = new Background(0, 0);
+let imgOne = "./images/playground.png";
+let bgOne = new Background (0,0,canvasOne,ctxOne,imgOne);
+
 
 // Player
 class Player {
@@ -325,8 +341,7 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   startLevelOne();
 });
 
-const canvasOne = document.getElementById("canvasOne");
-let ctxOne = canvasOne.getContext("2d");
+
 
 
 
@@ -363,8 +378,8 @@ function startLevelOne() {
       initializeLives(lives, livesOne);
 
       // Background
-      bg.move();
-      bg.drawBg();
+      bgOne.move();
+      bgOne.drawBg();
 
       // Player Image
       player.drawPlayer();
@@ -383,7 +398,7 @@ function startLevelOne() {
     }, 20);
   }, 3000);
 
-  bg.drawBg();
+  bgOne.drawBg();
   player.drawPlayer();
 }
 
