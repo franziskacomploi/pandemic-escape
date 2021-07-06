@@ -6,7 +6,7 @@ html {
 
 body {
     display: flex;
-    background-image: url(/pandemic-escape/images/background.jpeg);
+    background-image: url(/pandemic-escape/images/background.png);
     background-size: cover;
     justify-content: center;
     align-items: center;
@@ -37,6 +37,10 @@ p {
     margin: 20px;
 }
 
+#gameOver img {
+    width: 200px;
+}
+
 .gameBg {
     height: 600px;
     width: 750px;
@@ -45,7 +49,7 @@ p {
 }
 
 #home img {
-    width: 50px;
+    width: 70px;
     margin: 20px;
 }
 
