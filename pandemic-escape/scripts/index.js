@@ -28,6 +28,11 @@ let ctxOne = canvasOne.getContext("2d");
 const canvasTwo = document.getElementById("canvasTwo");
 let ctxTwo = canvasTwo.getContext("2d");
 
+// Sound
+
+let goodSound = new Audio("./audio/good.mp3");
+let badSound = new Audio("./audio/bad.mp3");
+
 // Lives Function
 
 function switchToGameOver() {
@@ -133,9 +138,11 @@ function testDanger(player, obstacleArr) {
       let theOneObstacle = obstacleArr.splice(i, 1)[0];
       if (theOneObstacle.danger == true) {
         updateLives();
+        goodSound.play();
         console.log("danger");
       } else if (theOneObstacle.danger == false) {
         updateCounter();
+        badSound.play();
         console.log("no danger");
       }
     }
