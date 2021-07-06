@@ -8,6 +8,10 @@ document.querySelector(".startButton").addEventListener("click", () => {
 // Game Over Screen
 
 document.querySelector(".gameOverButton").addEventListener("click", () => {
+  gameFrames = 0;
+  lives = 3;
+  masks = [];
+  viruses = []
   document.getElementById("gameOver").classList.add("hidden");
   document.getElementById("home").classList.remove("hidden");
 });
@@ -59,13 +63,13 @@ function switchToWin() {
   document.getElementById("win").classList.remove("hidden");
 }
 
-function initializeTimer(count, timerDiv, level) {
+function initializeTimer(count, timerDiv) {
   let timerCount = count;
   timerDiv.innerHTML = `${timerCount} seconds left`;
   const intervalId = setInterval(() => {
     timerCount--;
     timerDiv.innerHTML = `${timerCount} seconds left`;
-    if (timerCount == 0) {
+    if (timerCount == 0 || timerRunOut == 0) {
       clearInterval(intervalId);
       timerDiv.innerHTML = `Time has run out!`;
 
@@ -360,7 +364,6 @@ let counterCount = 0;
 
 // Start Game
 function startLevelOne() {
-  let level = 1;
   // Timer One
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
@@ -372,7 +375,7 @@ function startLevelOne() {
   }
 
   setTimeout(function () {
-    initializeTimer(20, timerOne, level);
+    initializeTimer(20, timerOne);
 
     // Playground
     let intervalIdOne = setInterval(() => {
@@ -432,7 +435,6 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
 
 
 function startLevelTwo() {
-   level = 2;
 
 
   // Timer
