@@ -252,12 +252,8 @@ class Mask extends Obstacle {
 }
 function createMasks(ctx) {
   if (gameFrames % 180 === 0) {
-<<<<<<< HEAD
     masks.push(new Mask(ctx));
-=======
-    masks.push(new Mask(ctxOne, imgMaskOne));
 
->>>>>>> d8f5ea44c15a0fe16d6c83c2223202f3202a0428
   }
 }
 function updateMasks() {
@@ -267,7 +263,6 @@ function updateMasks() {
   }
 }
 
-<<<<<<< HEAD
 // Injection
 let injections = [];
 class Injection extends Obstacle {
@@ -288,30 +283,6 @@ function updateInjections() {
     injections[i].drawTwo();
   }
 }
-=======
-
-
-// // Injection
-// let injections = [];
-// class Injection extends Obstacle {
-//   constructor(){
-//     super();
-//     this.danger = false;
-//     this.img.src = "./images/injection.png"
-//   }
-// }
-// function createInjections() {
-//   if (gameFrames % 300 === 0) {
-//     injections.push(new Injection());
-//   }
-// }
-// function updateInjections() {
-//   for (let i = 0; i < injections.length; i++) {
-//     injections[i].x += injections[i].vx;
-//     injections[i].drawTwo();
-//   }
-// }
->>>>>>> d8f5ea44c15a0fe16d6c83c2223202f3202a0428
 
 // Virus
 let viruses = [];
