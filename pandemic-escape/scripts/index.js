@@ -225,7 +225,8 @@ let playerOne = new Player(0, 240, ctxOne, imgPlayerOne);
 
 // Obstacle
 class Obstacle {
-  constructor() {
+  constructor(ctx) {
+    this.ctx = ctx;
     this.x = 700;
     this.y = Math.floor(Math.random() * 500);
     this.vx = -4;
@@ -236,7 +237,7 @@ class Obstacle {
   }
 
   draw() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -251,7 +252,12 @@ class Mask extends Obstacle {
 }
 function createMasks(ctx) {
   if (gameFrames % 180 === 0) {
+<<<<<<< HEAD
     masks.push(new Mask(ctx));
+=======
+    masks.push(new Mask(ctxOne, imgMaskOne));
+
+>>>>>>> d8f5ea44c15a0fe16d6c83c2223202f3202a0428
   }
 }
 function updateMasks() {
@@ -261,6 +267,7 @@ function updateMasks() {
   }
 }
 
+<<<<<<< HEAD
 // Injection
 let injections = [];
 class Injection extends Obstacle {
@@ -281,6 +288,30 @@ function updateInjections() {
     injections[i].drawTwo();
   }
 }
+=======
+
+
+// // Injection
+// let injections = [];
+// class Injection extends Obstacle {
+//   constructor(){
+//     super();
+//     this.danger = false;
+//     this.img.src = "./images/injection.png"
+//   }
+// }
+// function createInjections() {
+//   if (gameFrames % 300 === 0) {
+//     injections.push(new Injection());
+//   }
+// }
+// function updateInjections() {
+//   for (let i = 0; i < injections.length; i++) {
+//     injections[i].x += injections[i].vx;
+//     injections[i].drawTwo();
+//   }
+// }
+>>>>>>> d8f5ea44c15a0fe16d6c83c2223202f3202a0428
 
 // Virus
 let viruses = [];
@@ -421,6 +452,8 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     gameFrames = 0;
     timerRunOut = 1;
     lives = 3;
+    masks = [];
+    viruses = []
 
     startLevelTwo();
 })
