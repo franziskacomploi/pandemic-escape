@@ -250,9 +250,9 @@ class Mask extends Obstacle {
     this.img.src = "./images/mask.png";
   }
 }
-function createMasks() {
+function createMasks(ctx) {
   if (gameFrames % 180 === 0) {
-    masks.push(new Mask(ctxOne, imgMaskOne));
+    masks.push(new Mask(ctx));
 
   }
 }
@@ -263,28 +263,26 @@ function updateMasks() {
   }
 }
 
-
-
-// // Injection
-// let injections = [];
-// class Injection extends Obstacle {
-//   constructor(){
-//     super();
-//     this.danger = false;
-//     this.img.src = "./images/injection.png"
-//   }
-// }
-// function createInjections() {
-//   if (gameFrames % 300 === 0) {
-//     injections.push(new Injection());
-//   }
-// }
-// function updateInjections() {
-//   for (let i = 0; i < injections.length; i++) {
-//     injections[i].x += injections[i].vx;
-//     injections[i].drawTwo();
-//   }
-// }
+// Injection
+let injections = [];
+class Injection extends Obstacle {
+  constructor(){
+    super();
+    this.danger = false;
+    this.img.src = "./images/injection.png"
+  }
+}
+function createInjections() {
+  if (gameFrames % 300 === 0) {
+    injections.push(new Injection());
+  }
+}
+function updateInjections() {
+  for (let i = 0; i < injections.length; i++) {
+    injections[i].x += injections[i].vx;
+    injections[i].drawTwo();
+  }
+}
 
 // Virus
 let viruses = [];
@@ -308,26 +306,26 @@ function updateVirus() {
   }
 }
 
-// Querdenker 
-// let querdenker = [];
-// class Querdenker extends Obstacle {
-//   constructor() {
-//     super();
-//     this.danger = true;
-//     this.img.src = "./images/querdenker.png";
-//   }
-// }
-// function createQuerdenker() {
-//   if (gameFrames % 160 === 0) {
-//     querdenker.push(new Querdenker());
-//   }
-// }
-// function updateQuerdenker() {
-//   for (let i = 0; i < querdenker.length; i++) {
-//     querdenker[i].x += querdenker[i].vx;
-//     querdenker[i].drawTwo();
-//   }
-// }
+Querdenker 
+let querdenker = [];
+class Querdenker extends Obstacle {
+  constructor() {
+    super();
+    this.danger = true;
+    this.img.src = "./images/querdenker.png";
+  }
+}
+function createQuerdenker() {
+  if (gameFrames % 160 === 0) {
+    querdenker.push(new Querdenker());
+  }
+}
+function updateQuerdenker() {
+  for (let i = 0; i < querdenker.length; i++) {
+    querdenker[i].x += querdenker[i].vx;
+    querdenker[i].drawTwo();
+  }
+}
 
 
 
@@ -394,14 +392,14 @@ function startLevelOne() {
       // Player Image
       playerOne.drawPlayer();
 
-      createMasks();
+      createMasks(ctxOne);
       updateMasks();
 
       createVirus();
       updateVirus();
 
-      testDanger(player, masks);
-      testDanger(player, viruses);
+      testDanger(playerOne, masks);
+      testDanger(playerOne, viruses);
 
       timeRunOut(intervalIdOne);
       gameFrames++;
