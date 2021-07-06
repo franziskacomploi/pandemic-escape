@@ -434,6 +434,10 @@ function startLevelTwo() {
   initializeLives(lives, livesTwo);
   startTimer(60, timerTwo);
 
+  document.onkeydown = function (e) {
+    keyControl(e, playerTwo);
+  }
+
   setTimeout(() => {
 
   initializeTimer(60, timerTwo);
