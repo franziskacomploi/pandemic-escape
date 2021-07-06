@@ -5,21 +5,6 @@ document.querySelector(".startButton").addEventListener("click", () => {
   document.getElementById("infoOne").classList.remove("hidden");
 });
 
-// Info Screen One
-
-document.querySelector(".infoOneButton").addEventListener("click", () => {
-  document.getElementById("infoOne").classList.add("hidden");
-  document.getElementById("levelOne").classList.remove("hidden");
-  gameFrames = 0;
-  timerRunOut = 1;
-  lives = 3;
-  counterCount = 0;
-
-  player.resetPlayer(0,240);
-
-  startLevelOne();
-});
-
 // Game Over Screen
 
 document.querySelector(".gameOverButton").addEventListener("click", () => {
@@ -28,6 +13,7 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
 });
 
 // Lives Function
+
 function switchToGameOver() {
   document.getElementById("levelOne").classList.add("hidden");
   document.getElementById("gameOver").classList.remove("hidden");
@@ -51,6 +37,7 @@ function updateLives() {
 }
 
 // Timer Function
+
 function switchToInfoTwo() {
   document.getElementById("levelOne").classList.add("hidden");
   document.getElementById("infoTwo").classList.remove("hidden");
@@ -139,125 +126,8 @@ function testDanger(player, obstacleArr) {
   }
 }
 
-// Level One
-
-const canvasOne = document.getElementById("levelOneCanvas");
-let ctxOne = canvasOne.getContext("2d");
-
-// Background
-class Background {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = canvasOne.width;
-    this.height = canvasOne.height;
-    this.img = new Image();
-    this.img.src = "./images/gameBg.jpeg";
-    this.speed = -2;
-  }
-  drawBg() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
-    ctxOne.drawImage(
-      this.img,
-      this.x + canvasOne.width,
-      this.y,
-      this.width,
-      this.height
-    );
-  }
-  move() {
-    this.x += this.speed;
-    this.x %= canvasOne.width;
-  }
-}
-let bg = new Background(0, 0);
-
-// Player
-class Player {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 50;
-    this.height = 50;
-    this.img = new Image();
-    this.img.src = "./images/player.jpeg";
-  }
-  drawPlayer() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-
-  resetPlayer(x,y) {
-this.x = x;
-this.y = y;
-  }
-}
-let player = new Player(0, 240);
-
-// Obstacle
-class Obstacle {
-  constructor() {
-    this.x = 700;
-    this.y = Math.floor(Math.random() * 500);
-    this.vx = -4;
-    this.width = 60;
-    this.height = 60;
-    this.img = new Image();
-    this.danger = false;
-  }
-  draw() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-}
-
-// Mask
-let masks = [];
-class Mask extends Obstacle {
-  constructor() {
-    super();
-    this.danger = false;
-    this.img.src = "./images/mask.png";
-  }
-}
-function createMasks() {
-  if (gameFrames % 180 === 0) {
-    masks.push(new Mask());
-  }
-}
-function updateMasks() {
-  for (let i = 0; i < masks.length; i++) {
-    masks[i].x += masks[i].vx;
-    masks[i].draw();
-  }
-}
-
-// Virus
-let viruses = [];
-class Virus extends Obstacle {
-  constructor() {
-    super();
-    this.danger = true;
-    this.img.src = "./images/virus.png";
-    this.vx = -6;
-  }
-}
-function createVirus() {
-  if (gameFrames % 150 === 0) {
-    viruses.push(new Virus());
-  }
-}
-function updateVirus() {
-  for (let i = 0; i < viruses.length; i++) {
-    viruses[i].x += viruses[i].vx;
-    viruses[i].draw();
-  }
-}
-
-let gameFrames = 0;
-let timerRunOut = 1;
-let lives = 3;
-let counterCount = 0;
-
 // Keys
+
 document.onkeydown = function (e) {
   //left
   if (e.keyCode === 37) {
@@ -285,6 +155,183 @@ document.onkeydown = function (e) {
   }
   event.preventDefault();
 };
+
+// Level One
+
+document.querySelector(".infoOneButton").addEventListener("click", () => {
+  document.getElementById("infoOne").classList.add("hidden");
+  document.getElementById("levelOne").classList.remove("hidden");
+  gameFrames = 0;
+  timerRunOut = 1;
+  lives = 3;
+  counterCount = 0;
+
+  player.resetPlayer(0,240);
+
+  startLevelOne();
+});
+
+const canvasOne = document.getElementById("canvasOne");
+let ctxOne = canvasOne.getContext("2d");
+
+// Background
+class Background {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = canvasOne.width;
+    this.height = canvasOne.height;
+    this.img = new Image();
+    this.img.src = "./images/playground.png";
+    this.speed = -2;
+  }
+  drawBg() {
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctxOne.drawImage(
+      this.img,
+      this.x + canvasOne.width,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+  move() {
+    this.x += this.speed;
+    this.x %= canvasOne.width;
+  }
+}
+let bg = new Background(0, 0);
+
+// Player
+class Player {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 50;
+    this.height = 50;
+    this.img = new Image();
+    this.img.src = "./images/player.png";
+  }
+  drawPlayer() {
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  resetPlayer(x,y) {
+  this.x = x;
+  this.y = y;
+  }
+}
+let player = new Player(0, 240);
+
+// Obstacle
+class Obstacle {
+  constructor() {
+    this.x = 700;
+    this.y = Math.floor(Math.random() * 500);
+    this.vx = -4;
+    this.width = 60;
+    this.height = 60;
+    this.img = new Image();
+    this.danger = false;
+  }
+
+  draw() {
+    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+}
+
+// Mask
+let masks = [];
+class Mask extends Obstacle {
+  constructor() {
+    super();
+    this.danger = false;
+    this.img.src = "./images/mask.png";
+  }
+}
+function createMasks() {
+  if (gameFrames % 180 === 0) {
+    masks.push(new Mask());
+  }
+}
+function updateMasks() {
+  for (let i = 0; i < masks.length; i++) {
+    masks[i].x += masks[i].vx;
+    masks[i].draw();
+  }
+}
+
+// // Injection
+// let injections = [];
+// class Injection extends Obstacle {
+//   constructor(){
+//     super();
+//     this.danger = false;
+//     this.img.src = "./images/injection.png"
+//   }
+// }
+// function createInjections() {
+//   if (gameFrames % 300 === 0) {
+//     injections.push(new Injection());
+//   }
+// }
+// function updateInjections() {
+//   for (let i = 0; i < injections.length; i++) {
+//     injections[i].x += injections[i].vx;
+//     injections[i].drawTwo();
+//   }
+// }
+
+// Virus
+let viruses = [];
+class Virus extends Obstacle {
+  constructor() {
+    super();
+    this.danger = true;
+    this.img.src = "./images/virus.png";
+    this.vx = -6;
+  }
+}
+function createVirus() {
+  if (gameFrames % 150 === 0) {
+    viruses.push(new Virus());
+  }
+}
+function updateVirus() {
+  for (let i = 0; i < viruses.length; i++) {
+    viruses[i].x += viruses[i].vx;
+    viruses[i].draw();
+  }
+}
+
+// Querdenker 
+// let querdenker = [];
+// class Querdenker extends Obstacle {
+//   constructor() {
+//     super();
+//     this.danger = true;
+//     this.img.src = "./images/querdenker.png";
+//   }
+// }
+// function createQuerdenker() {
+//   if (gameFrames % 160 === 0) {
+//     querdenker.push(new Querdenker());
+//   }
+// }
+// function updateQuerdenker() {
+//   for (let i = 0; i < querdenker.length; i++) {
+//     querdenker[i].x += querdenker[i].vx;
+//     querdenker[i].drawTwo();
+//   }
+// }
+
+
+let gameFrames = 0;
+let timerRunOut = 1;
+let lives = 3;
+let counterCount = 0;
+
+
 
 // Start Game
 function startLevelOne() {
@@ -335,6 +382,9 @@ function startLevelOne() {
   player.drawPlayer();
 }
 
+
+
+
 // Level Two
 // Info Screen Two
 
@@ -345,7 +395,7 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     gameFrames = 0;
     timerRunOut = 1;
     lives = 3;
-  
+
     startLevelTwo();
 })
 
@@ -360,11 +410,11 @@ function startLevelTwo() {
   initializeLives(lives, livesTwo);
   startTimer(60, timerTwo);
 
-setTimeout(() => {
+  setTimeout(() => {
 
   initializeTimer(60, timerTwo);
 
-let intervalIdTwo = setInterval(() => {
+  let intervalIdTwo = setInterval(() => {
 
   // Counter
   const counterTwo = document.querySelector("#counterTwo");
@@ -374,15 +424,11 @@ let intervalIdTwo = setInterval(() => {
   const livesTwo = document.querySelector("#livesTwo");
   initializeLives(lives, livesTwo);
 
-
-
-  
   timeRunOut(intervalIdTwo);
   gameFrames++;
   },20)
 
 }, 3000);
-
 }
 
 // Canvas
