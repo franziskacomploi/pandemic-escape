@@ -196,22 +196,23 @@ class Background {
     this.x %= this.canvas.width;
   }
 }
-let imgOne = "./images/playground.png";
-let bgOne = new Background (0,0,canvasOne,ctxOne,imgOne);
+let imgBackgroundOne = "./images/playground.png";
+let bgOne = new Background (0,0,canvasOne,ctxOne,imgBackgroundOne);
 
 
 // Player
 class Player {
-  constructor(x, y) {
+  constructor(x, y, ctx, img) {
+    this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.width = 50;
     this.height = 50;
     this.img = new Image();
-    this.img.src = "./images/player.png";
+    this.img.src = img;
   }
   drawPlayer() {
-    ctxOne.drawImage(this.img, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   resetPlayer(x,y) {
@@ -219,7 +220,8 @@ class Player {
   this.y = y;
   }
 }
-let player = new Player(0, 240);
+let imgPlayerOne = "./images/player.png"
+let playerOne = new Player(0, 240, ctxOne, imgPlayerOne);
 
 // Obstacle
 class Obstacle {
@@ -336,7 +338,7 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   lives = 3;
   counterCount = 0;
 
-  player.resetPlayer(0,240);
+  playerOne.resetPlayer(0,240);
 
   startLevelOne();
 });
@@ -382,7 +384,7 @@ function startLevelOne() {
       bgOne.drawBg();
 
       // Player Image
-      player.drawPlayer();
+      playerOne.drawPlayer();
 
       createMasks();
       updateMasks();
@@ -399,7 +401,7 @@ function startLevelOne() {
   }, 3000);
 
   bgOne.drawBg();
-  player.drawPlayer();
+  playerOne.drawPlayer();
 }
 
 
