@@ -40,6 +40,9 @@ p {
 #gameOver img {
     width: 200px;
 }
+#win img {
+    width: 200px;
+}
 
 .gameBg {
     height: 600px;
