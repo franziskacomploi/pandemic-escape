@@ -80,6 +80,7 @@ function initializeTimer(count, timerDiv) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
       } else if (!document.getElementById("levelTwo").classList.contains("hidden")) {
+        timerRunOut = 0;
         setTimeout(switchToWin, 4000);
       }
     }
