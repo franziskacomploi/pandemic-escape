@@ -30,8 +30,6 @@ function switchToWin() {
 const canvasOne = document.getElementById("canvasOne");
 let ctxOne = canvasOne.getContext("2d");
 
-
-
 // Level two Canvas 
 
 const canvasTwo = document.getElementById("canvasTwo");
@@ -181,7 +179,7 @@ function keyControl (event, player) {
 
 // Background
 class Background {
-  constructor(x, y, canvas, ctx, img) {
+  constructor(x, y, canvas, ctx) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.x = x;
@@ -189,7 +187,7 @@ class Background {
     this.width = canvas.width;
     this.height = canvas.height;
     this.img = new Image();
-    this.img.src = img;
+    this.img.src = "./images/playground.png";
     this.speed = -2;
   }
   drawBg() {
@@ -207,20 +205,20 @@ class Background {
     this.x %= this.canvas.width;
   }
 }
-let imgBackgroundOne = "./images/playground.png";
-let bgOne = new Background (0,0,canvasOne,ctxOne,imgBackgroundOne);
 
+let bgOne = new Background (0, 0, canvasOne, ctxOne);
+let bgTwo = new Background (0, 0, canvasTwo, ctxTwo);
 
 // Player
 class Player {
-  constructor(x, y, ctx, img) {
+  constructor(x, y, ctx) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.width = 50;
     this.height = 50;
     this.img = new Image();
-    this.img.src = img;
+    this.img.src = "./images/player.png";
   }
   drawPlayer() {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -231,8 +229,9 @@ class Player {
   this.y = y;
   }
 }
-let imgPlayerOne = "./images/player.png"
-let playerOne = new Player(0, 240, ctxOne, imgPlayerOne);
+
+let playerOne = new Player(0, 240, ctxOne);
+let playerTwo = new Player(0, 240, ctxTwo);
 
 // Obstacle
 class Obstacle {
@@ -246,7 +245,6 @@ class Obstacle {
     this.img = new Image();
     this.danger = false;
   }
-
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
@@ -264,7 +262,6 @@ class Mask extends Obstacle {
 function createMasks(ctx) {
   if (gameFrames % 180 === 0) {
     masks.push(new Mask(ctx));
-
   }
 }
 function updateMasks() {
@@ -281,7 +278,7 @@ class Injection extends Obstacle {
     super(ctx);
     this.danger = false;
     this.img.src = "./images/injection.png"
-    this.vx = -2;
+    this.vx = -4;
   }
 }
 function createInjections(ctx) {
@@ -292,7 +289,7 @@ function createInjections(ctx) {
 function updateInjections() {
   for (let i = 0; i < injections.length; i++) {
     injections[i].x += injections[i].vx;
-    injections[i].drawTwo();
+    injections[i].draw();
   }
 }
 
@@ -337,7 +334,7 @@ function createQuerdenker(ctx) {
 function updateQuerdenker() {
   for (let i = 0; i < querdenker.length; i++) {
     querdenker[i].x += querdenker[i].vx;
-    querdenker[i].drawTwo();
+    querdenker[i].draw();
   }
 }
 
@@ -359,32 +356,27 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   startLevelOne();
 });
 
-
-
-
-
-
 let gameFrames = 0;
 let timerRunOut = 1;
 let lives = 3;
 let counterCount = 0;
 
+// Start Level One
 
-
-// Start Game
 function startLevelOne() {
+
   // Timer One
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
   initializeLives(lives, livesOne);
-  startTimer(20, timerOne);
+  startTimer(10, timerOne);
 
   document.onkeydown = function (e) {
     keyControl(e, playerOne);
   }
 
   setTimeout(function () {
-    initializeTimer(20, timerOne);
+    initializeTimer(10, timerOne);
 
     // Playground
     let intervalIdOne = setInterval(() => {
@@ -423,11 +415,7 @@ function startLevelOne() {
   playerOne.drawPlayer();
 }
 
-
-
-
 // Level Two
-// Info Screen Two
 
 document.querySelector(".infoTwoButton").addEventListener('click', () => {
     document.getElementById('infoTwo').classList.add('hidden');
@@ -442,15 +430,15 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     startLevelTwo();
 })
 
+// Start Level Two
 
 function startLevelTwo() {
-
 
   // Timer
   const timerTwo = document.querySelector("#timerTwo");
   initializeCounter(counterCount, counterTwo);
   initializeLives(lives, livesTwo);
-  startTimer(60, timerTwo);
+  startTimer(10, timerTwo);
 
   document.onkeydown = function (e) {
     keyControl(e, playerTwo);
@@ -458,7 +446,7 @@ function startLevelTwo() {
 
   setTimeout(() => {
 
-  initializeTimer(60, timerTwo);
+  initializeTimer(10, timerTwo);
 
   let intervalIdTwo = setInterval(() => {
 
@@ -470,24 +458,36 @@ function startLevelTwo() {
   const livesTwo = document.querySelector("#livesTwo");
   initializeLives(lives, livesTwo);
 
+
+  // Background
+  bgTwo.move();
+  bgTwo.drawBg();
+
+  // Player Image
+  playerTwo.drawPlayer();
+
+  createMasks(ctxTwo);
+  updateMasks();
+
+  createInjections(ctxTwo);
+  updateInjections();
+
+  createVirus(ctxTwo);
+  updateVirus();
+
+  createQuerdenker(ctxTwo);
+  updateQuerdenker();
+
+  testDanger(playerTwo, masks);
+  testDanger(playerTwo, injections);
+  testDanger(playerTwo, viruses);
+  testDanger(playerTwo, querdenker);
+
   timeRunOut(intervalIdTwo);
   gameFrames++;
   },20)
 
 }, 3000);
+bgTwo.drawBg();
+playerTwo.drawPlayer();
 }
-
-// Canvas
-// Background --> Same as Level 1 (maybe different image)
-// Class Player = Mouth --> Same as Level 1
-// Control via Arrows --> Same as Level 1
-// Class Counterpart: Virus, Masks, Needles, "Querdenker" --> Querdenker, Needles as an addition
-// Masks = more points --> Same as Level 1
-// Virus, Querdenker (quicker than virus) = costs a live --> Same as Level 1
-// Needles = You need at least two to win --> New as an addition
-
-// You loose = Section mit class hidden
-
-// You won! = Section mit class hidden
-// Add "You collected XX masks."
-// Highscore for Mask Points
