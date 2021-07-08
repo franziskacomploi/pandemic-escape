@@ -51,7 +51,15 @@ let badSound = new Audio("./audio/bad.mp3");
 // Lives Function
 
 function switchToGameOver() {
-  document.getElementById("levelOne").classList.add("hidden");
+  const levelOne = document.getElementById("levelOne");
+  const levelTwo = document.getElementById("levelTwo");
+  
+  if (!levelOne.classList.contains("hidden")) {
+    levelOne.classList.add("hidden");
+  } else if (!levelTwo.classList.contains("hidden")) {
+    levelTwo.classList.add("hidden");
+  }
+
   document.getElementById("gameOver").classList.remove("hidden");
   timerRunOut = 0;
 }
@@ -378,14 +386,14 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
   initializeLives(lives, livesOne);
-  startTimer(10, timerOne);
+  startTimer(30, timerOne);
 
   document.onkeydown = function (e) {
     keyControl(e, playerOne);
   }
 
   setTimeout(function () {
-    initializeTimer(10, timerOne);
+    initializeTimer(30, timerOne);
 
     // Playground
     let intervalIdOne = setInterval(() => {
@@ -449,7 +457,7 @@ function startLevelTwo() {
   const timerTwo = document.querySelector("#timerTwo");
   initializeCounter(counterCount, counterTwo);
   initializeLives(lives, livesTwo);
-  startTimer(10, timerTwo);
+  startTimer(30, timerTwo);
 
   document.onkeydown = function (e) {
     keyControl(e, playerTwo);
@@ -457,7 +465,7 @@ function startLevelTwo() {
 
   setTimeout(() => {
 
-  initializeTimer(10, timerTwo);
+  initializeTimer(30, timerTwo);
 
   let intervalIdTwo = setInterval(() => {
 
