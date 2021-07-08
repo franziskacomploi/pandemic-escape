@@ -23,7 +23,15 @@ function switchToInfoTwo() {
 function switchToWin() {
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
+  document.getElementById("finishScreen").innerHTML = `${counterCount}`;
 }
+
+// Play again Button at Win Screen
+
+document.querySelector(".winButton").addEventListener("click", () => {
+  document.getElementById("win").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+});
 
 // Level one Canvas
 
