@@ -12,3 +12,7 @@ Ironhack Project 1 - The Game
 ## Team: 
 - Julia Häußler
 - Franziska Pendzialek
+
+## Deployed Page
+
+https://pandemic-escape.netlify.app/
