@@ -23,6 +23,7 @@ function switchToInfoTwo() {
 function switchToWin() {
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
+  document.getElementById("finishScreen").innerHTML = `${counterCount}`;
 }
 
 // Play again Button at Win Screen
