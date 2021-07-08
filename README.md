@@ -16,3 +16,8 @@ Ironhack Project 1 - The Game
 ## Deployed Page
 
 https://pandemic-escape.netlify.app/
+
+
+## Presentation
+
+https://docs.google.com/presentation/d/1n5Nfrym1QLj62bKBGMCQRTypnO6mbCWqRcd-36u51pg/edit?usp=sharing
