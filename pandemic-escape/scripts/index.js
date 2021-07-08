@@ -269,7 +269,7 @@ class Mask extends Obstacle {
   }
 }
 function createMasks(ctx) {
-  if (gameFrames % 180 === 0) {
+  if (gameFrames % 170 === 0) {
     masks.push(new Mask(ctx));
   }
 }
@@ -291,7 +291,7 @@ class Injection extends Obstacle {
   }
 }
 function createInjections(ctx) {
-  if (gameFrames % 300 === 0) {
+  if (gameFrames % 250 === 0) {
     injections.push(new Injection(ctx));
   }
 }
@@ -313,7 +313,7 @@ class Virus extends Obstacle {
   }
 }
 function createVirus(ctx) {
-  if (gameFrames % 150 === 0) {
+  if (gameFrames % 140 === 0) {
     viruses.push(new Virus(ctx));
   }
 }
@@ -336,7 +336,7 @@ class Querdenker extends Obstacle {
   }
 }
 function createQuerdenker(ctx) {
-  if (gameFrames % 160 === 0) {
+  if (gameFrames % 130 === 0) {
     querdenker.push(new Querdenker(ctx));
   }
 }
@@ -435,6 +435,8 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     lives = 3;
     masks = [];
     viruses = []
+
+    playerTwo.resetPlayer(0,240);
 
     startLevelTwo();
 })
