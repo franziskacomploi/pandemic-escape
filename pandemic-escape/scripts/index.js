@@ -51,7 +51,15 @@ let badSound = new Audio("./audio/bad.mp3");
 // Lives Function
 
 function switchToGameOver() {
-  document.getElementById("levelOne").classList.add("hidden");
+  const levelOne = document.getElementById("levelOne");
+  const levelTwo = document.getElementById("levelTwo");
+  
+  if (!levelOne.classList.contains("hidden")) {
+    levelOne.classList.add("hidden");
+  } else if (!levelTwo.classList.contains("hidden")) {
+    levelTwo.classList.add("hidden");
+  }
+
   document.getElementById("gameOver").classList.remove("hidden");
   timerRunOut = 0;
 }
