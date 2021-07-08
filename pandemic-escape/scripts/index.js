@@ -436,7 +436,7 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     masks = [];
     viruses = []
 
-    
+    playerTwo.resetPlayer(0,240);
 
     startLevelTwo();
 })
