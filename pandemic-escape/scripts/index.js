@@ -25,6 +25,13 @@ function switchToWin() {
   document.getElementById("win").classList.remove("hidden");
 }
 
+// Play again Button at Win Screen
+
+document.querySelector(".winButton").addEventListener("click", () => {
+  document.getElementById("win").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+});
+
 // Level one Canvas
 
 const canvasOne = document.getElementById("canvasOne");
