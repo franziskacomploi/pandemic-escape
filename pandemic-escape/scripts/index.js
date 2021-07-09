@@ -95,22 +95,28 @@ function startTimer(count, timerDiv) {
 // Countdown Circles Function
 
 function initializeCountdown(waitingDiv) {
+  let circle = `<img class="circlesImg" src="./images/wait.png"></img>`;
   const circlesArr = [];
   for (let i = 1; i <= 3; i++){
-    circlesArr.push(`<img class="circlesImg" src="./images/wait.png"></img>`);
+    circlesArr.push(circle);
   }
   let circles = circlesArr.join(" ");
-  waitingDiv.innerHTML = `30 seconds start in ${circles}`;
-  
+  waitingDiv.innerHTML = `<p>30 seconds start in<br> ${circles} </p>`;
+  // setInterval(() => {
+  //   for (let i = 3; i >= 0; i--){
+  //     circlesArr.pop(circle)
+  //     console.log(circlesArr)
+  //   }
+  // }, 1000)
 }
 
-// function updateCountdown(){
-//   for (let i=3; i>=0; i--){
-//     circlesArr.pop(`<img class="circlesImg" src="./images/wait.png"></img>`)
-//   }
-// }
-
-
+function addCross(waitingDiv) {
+  let cross = `<img class="crossImg" src="./images/cross.png".></img>`
+  const crossArr = [];
+  crossArr.push(cross)
+  let crosses = crossArr.join(" ");
+  waitingDiv.innerHTML = crosses;
+}
 
 function hideCountdownOne() {
   document.getElementById("waitingOne").classList.add("hidden");
@@ -405,7 +411,8 @@ function startLevelOne() {
   }
 
   initializeCountdown(waitingOne);
-  //updateCountdown();
+  setInterval(addCross(waitingOne), 1000);
+ 
 
   setTimeout(function () {
     hideCountdownOne();

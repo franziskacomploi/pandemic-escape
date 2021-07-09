@@ -74,7 +74,7 @@ button:hover {
 #waitingOne {
     position: absolute;
     margin-top: 200px;
-    margin-left: 150px;
+    margin-left: 250px;
     padding: 10px;
     z-index: 2;
     border: 3px solid rgb(234,61,212);
@@ -85,6 +85,9 @@ button:hover {
 }
 
 .circlesImg {
+    width: 50px;
+}
+.crossImg {
     width: 50px;
 }
 
