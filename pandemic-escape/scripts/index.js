@@ -120,22 +120,24 @@ function initializeCountdown(waitingDiv) {
   }
   let circles = circlesArr.join(" ");
   waitingDiv.innerHTML = `<p>30 seconds start in<br> ${circles} </p>`;
+
 }
 
 const crossArr = [];
 
-function addCross(waitingDiv) {
+function addCross() {
   let cross = `<img class="crossImg" src="./images/cross.png".></img>`
   crossArr.push(cross)
 }
 
-function updateCross(waitingDiv){
+function updateCross(crossDiv){
   let crosses = crossArr.join(" ");
-  waitingDiv.innerHTML = crosses;
+  crossDiv.innerHTML = crosses;
 }
 
 function hideCountdownOne() {
   document.getElementById("waitingOne").classList.add("hidden");
+  document.getElementById("crossOne").classList.add("hidden");
 }
 
 function hideCountdownTwo() {
@@ -423,15 +425,16 @@ function startLevelOne() {
   };
 
   initializeCountdown(waitingOne);
-  let countdownOne = 0;
-  const countdownId = setInterval(() => {
-    addCross(waitingOne);
-    updateCross(waitingOne);
-    countdownOne++;
-    if (countdownOne === 3) {
-      clearInterval(countdownId);
-    }
-  }, 1000);
+    let countdownOne = 0;
+    let countdownId = setInterval(() => {
+      addCross(crossOne);
+      updateCross(crossOne);
+      countdownOne++;
+      if (countdownOne === 3) {
+        clearInterval(countdownId);
+      }
+    },1000)
+  
 
   setTimeout(function () {
     hideCountdownOne();
@@ -469,7 +472,8 @@ function startLevelOne() {
       timeRunOut(intervalIdOne);
       gameFrames++;
     }, 20);
-  }, 3000);
+  }, 4000);
+  
 
   bgOne.drawBg();
   playerOne.drawPlayer();
