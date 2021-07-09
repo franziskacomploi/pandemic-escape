@@ -473,6 +473,7 @@ function startLevelOne() {
       gameFrames++;
     }, 20);
   }, 4000);
+  
 
   bgOne.drawBg();
   playerOne.drawPlayer();
