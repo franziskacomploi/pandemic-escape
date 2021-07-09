@@ -71,7 +71,7 @@ button:hover {
     margin: 20px;
 }
 
-#waitingOne {
+.waiting {
     position: absolute;
     margin-top: 200px;
     margin-left: 250px;
@@ -83,13 +83,14 @@ button:hover {
     text-align: center;
     align-items: center;
 }
-#crossOne {
+.cross {
     position: absolute;
     margin-top: 270px;
     margin-left: 250px;
     padding: 10px;
     z-index: 3;
 }
+
 
 .circlesImg {
     width: 50px;
@@ -99,6 +100,9 @@ button:hover {
 }
 
 #canvasOne {
+    z-index: 1;
+}
+#canvasTwo {
     z-index: 1;
 }
 
