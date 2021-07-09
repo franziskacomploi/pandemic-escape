@@ -11,7 +11,7 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
   gameFrames = 0;
   lives = 3;
   masks = [];
-  viruses = []
+  viruses = [];
   document.getElementById("gameOver").classList.add("hidden");
   document.getElementById("home").classList.remove("hidden");
 });
@@ -38,7 +38,7 @@ document.querySelector(".winButton").addEventListener("click", () => {
 const canvasOne = document.getElementById("canvasOne");
 let ctxOne = canvasOne.getContext("2d");
 
-// Level two Canvas 
+// Level two Canvas
 
 const canvasTwo = document.getElementById("canvasTwo");
 let ctxTwo = canvasTwo.getContext("2d");
@@ -53,7 +53,7 @@ let badSound = new Audio("./audio/bad.mp3");
 function switchToGameOver() {
   const levelOne = document.getElementById("levelOne");
   const levelTwo = document.getElementById("levelTwo");
-  
+
   if (!levelOne.classList.contains("hidden")) {
     levelOne.classList.add("hidden");
   } else if (!levelTwo.classList.contains("hidden")) {
@@ -95,7 +95,9 @@ function initializeTimer(count, timerDiv) {
       if (!document.getElementById("levelOne").classList.contains("hidden")) {
         timerRunOut = 0;
         setTimeout(switchToInfoTwo, 4000);
-      } else if (!document.getElementById("levelTwo").classList.contains("hidden")) {
+      } else if (
+        !document.getElementById("levelTwo").classList.contains("hidden")
+      ) {
         timerRunOut = 0;
         setTimeout(switchToWin, 4000);
       }
@@ -113,7 +115,7 @@ function startTimer(count, timerDiv) {
 function initializeCountdown(waitingDiv) {
   let circle = `<img class="circlesImg" src="./images/wait.png"></img>`;
   const circlesArr = [];
-  for (let i = 1; i <= 3; i++){
+  for (let i = 1; i <= 3; i++) {
     circlesArr.push(circle);
   }
   let circles = circlesArr.join(" ");
@@ -127,9 +129,9 @@ function initializeCountdown(waitingDiv) {
 }
 
 function addCross(waitingDiv) {
-  let cross = `<img class="crossImg" src="./images/cross.png".></img>`
+  let cross = `<img class="crossImg" src="./images/cross.png".></img>`;
   const crossArr = [];
-  crossArr.push(cross)
+  crossArr.push(cross);
   let crosses = crossArr.join(" ");
   waitingDiv.innerHTML = crosses;
 }
@@ -200,7 +202,7 @@ function testDanger(player, obstacleArr) {
 
 // Keys
 
-function keyControl (event, player) {
+function keyControl(event, player) {
   //left
   if (event.keyCode === 37) {
     if (player.x > 0 && player.x < 621) {
@@ -226,7 +228,7 @@ function keyControl (event, player) {
     }
   }
   event.preventDefault();
-};
+}
 
 // Background
 class Background {
@@ -257,8 +259,8 @@ class Background {
   }
 }
 
-let bgOne = new Background (0, 0, canvasOne, ctxOne);
-let bgTwo = new Background (0, 0, canvasTwo, ctxTwo);
+let bgOne = new Background(0, 0, canvasOne, ctxOne);
+let bgTwo = new Background(0, 0, canvasTwo, ctxTwo);
 
 // Player
 class Player {
@@ -275,9 +277,9 @@ class Player {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  resetPlayer(x,y) {
-  this.x = x;
-  this.y = y;
+  resetPlayer(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -325,10 +327,10 @@ function updateMasks() {
 // Injection
 let injections = [];
 class Injection extends Obstacle {
-  constructor(ctx){
+  constructor(ctx) {
     super(ctx);
     this.danger = false;
-    this.img.src = "./images/injection.png"
+    this.img.src = "./images/injection.png";
     this.vx = -4;
   }
 }
@@ -389,9 +391,6 @@ function updateQuerdenker() {
   }
 }
 
-
-
-
 // Level One
 
 document.querySelector(".infoOneButton").addEventListener("click", () => {
@@ -402,7 +401,7 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   lives = 3;
   counterCount = 0;
 
-  playerOne.resetPlayer(0,240);
+  playerOne.resetPlayer(0, 240);
 
   startLevelOne();
 });
@@ -415,7 +414,6 @@ let counterCount = 0;
 // Start Level One
 
 function startLevelOne() {
-
   // Timer One
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
@@ -424,11 +422,18 @@ function startLevelOne() {
 
   document.onkeydown = function (e) {
     keyControl(e, playerOne);
-  }
+  };
 
   initializeCountdown(waitingOne);
-  setInterval(addCross(waitingOne), 1000);
- 
+  let countdownOne = 0;
+  const countdownId = setInterval(() => {
+    addCross(waitingOne);
+    updateCross(waitingOne);
+    countdownOne++;
+    if (countdownOne === 3) {
+      clearInterval(countdownId);
+    }
+  }, 1000);
 
   setTimeout(function () {
     hideCountdownOne();
@@ -466,7 +471,7 @@ function startLevelOne() {
       timeRunOut(intervalIdOne);
       gameFrames++;
     }, 20);
-   }, 3000);
+  }, 3000);
 
   bgOne.drawBg();
   playerOne.drawPlayer();
@@ -474,25 +479,24 @@ function startLevelOne() {
 
 // Level Two
 
-document.querySelector(".infoTwoButton").addEventListener('click', () => {
-    document.getElementById('infoTwo').classList.add('hidden');
-    document.getElementById('levelTwo').classList.remove('hidden');
+document.querySelector(".infoTwoButton").addEventListener("click", () => {
+  document.getElementById("infoTwo").classList.add("hidden");
+  document.getElementById("levelTwo").classList.remove("hidden");
 
-    gameFrames = 0;
-    timerRunOut = 1;
-    lives = 3;
-    masks = [];
-    viruses = []
+  gameFrames = 0;
+  timerRunOut = 1;
+  lives = 3;
+  masks = [];
+  viruses = [];
 
-    playerTwo.resetPlayer(0,240);
+  playerTwo.resetPlayer(0, 240);
 
-    startLevelTwo();
-})
+  startLevelTwo();
+});
 
 // Start Level Two
 
 function startLevelTwo() {
-
   // Timer
   const timerTwo = document.querySelector("#timerTwo");
   initializeCounter(counterCount, counterTwo);
@@ -501,52 +505,48 @@ function startLevelTwo() {
 
   document.onkeydown = function (e) {
     keyControl(e, playerTwo);
-  }
+  };
 
   setTimeout(() => {
+    initializeTimer(30, timerTwo);
 
-  initializeTimer(30, timerTwo);
+    let intervalIdTwo = setInterval(() => {
+      // Counter
+      const counterTwo = document.querySelector("#counterTwo");
+      initializeCounter(counterCount, counterTwo);
 
-  let intervalIdTwo = setInterval(() => {
+      // Lives Level Two
+      const livesTwo = document.querySelector("#livesTwo");
+      initializeLives(lives, livesTwo);
 
-  // Counter
-  const counterTwo = document.querySelector("#counterTwo");
-  initializeCounter(counterCount, counterTwo);
+      // Background
+      bgTwo.move();
+      bgTwo.drawBg();
 
-  // Lives Level Two
-  const livesTwo = document.querySelector("#livesTwo");
-  initializeLives(lives, livesTwo);
+      // Player Image
+      playerTwo.drawPlayer();
 
+      createMasks(ctxTwo);
+      updateMasks();
 
-  // Background
-  bgTwo.move();
+      createInjections(ctxTwo);
+      updateInjections();
+
+      createVirus(ctxTwo);
+      updateVirus();
+
+      createQuerdenker(ctxTwo);
+      updateQuerdenker();
+
+      testDanger(playerTwo, masks);
+      testDanger(playerTwo, injections);
+      testDanger(playerTwo, viruses);
+      testDanger(playerTwo, querdenker);
+
+      timeRunOut(intervalIdTwo);
+      gameFrames++;
+    }, 20);
+  }, 3000);
   bgTwo.drawBg();
-
-  // Player Image
   playerTwo.drawPlayer();
-
-  createMasks(ctxTwo);
-  updateMasks();
-
-  createInjections(ctxTwo);
-  updateInjections();
-
-  createVirus(ctxTwo);
-  updateVirus();
-
-  createQuerdenker(ctxTwo);
-  updateQuerdenker();
-
-  testDanger(playerTwo, masks);
-  testDanger(playerTwo, injections);
-  testDanger(playerTwo, viruses);
-  testDanger(playerTwo, querdenker);
-
-  timeRunOut(intervalIdTwo);
-  gameFrames++;
-  },20)
-
-}, 3000);
-bgTwo.drawBg();
-playerTwo.drawPlayer();
 }
