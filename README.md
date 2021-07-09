@@ -2,7 +2,8 @@
 Ironhack Project 1 - The Game
 
 ## Key Learnings: 
-- 
+- using Git as a team
+- don't trust your code: code seems fine, the game as well, but then something unexpected happened of course
 
 ## Features:
 - Two Levels
