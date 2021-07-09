@@ -7,6 +7,10 @@ let lives = 3;
 let counterCount = 0;
 let countdownOne = 0;
 let crossArr = [];
+let masks = [];
+let injections = [];
+let viruses = [];
+let querdenker = [];
 
 
 // Start Screen
@@ -18,6 +22,20 @@ document.querySelector(".startButton").addEventListener("click", () => {
 
 // Game Over Screen
 
+function switchToGameOver() {
+  const levelOne = document.getElementById("levelOne");
+  const levelTwo = document.getElementById("levelTwo");
+
+  if (!levelOne.classList.contains("hidden")) {
+    levelOne.classList.add("hidden");
+  } else if (!levelTwo.classList.contains("hidden")) {
+    levelTwo.classList.add("hidden");
+  }
+
+  document.getElementById("gameOver").classList.remove("hidden");
+  timerRunOut = 0;
+}
+
 document.querySelector(".gameOverButton").addEventListener("click", () => {
   gameFrames = 0;
   lives = 3;
@@ -27,17 +45,14 @@ document.querySelector(".gameOverButton").addEventListener("click", () => {
   document.getElementById("home").classList.remove("hidden");
 });
 
-function switchToInfoTwo() {
-  document.getElementById("levelOne").classList.add("hidden");
-  document.getElementById("infoTwo").classList.remove("hidden");
-}
+
+// Win Screen
+
 function switchToWin() {
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
   document.getElementById("finishScreen").innerHTML = `${counterCount}`;
 }
-
-// Play again Button at Win Screen
 
 document.querySelector(".winButton").addEventListener("click", () => {
   gameFrames = 0;
@@ -65,21 +80,6 @@ let badSound = new Audio("./audio/bad.mp3");
 
 
 // Lives Function
-
-function switchToGameOver() {
-  const levelOne = document.getElementById("levelOne");
-  const levelTwo = document.getElementById("levelTwo");
-
-  if (!levelOne.classList.contains("hidden")) {
-    levelOne.classList.add("hidden");
-  } else if (!levelTwo.classList.contains("hidden")) {
-    levelTwo.classList.add("hidden");
-  }
-
-  document.getElementById("gameOver").classList.remove("hidden");
-  timerRunOut = 0;
-  crossArr = [];
-}
 
 function initializeLives(lives, livesDiv) {
   const heartsArr = [];
@@ -173,15 +173,11 @@ function updateCross(crossDiv) {
   crossDiv.innerHTML = crosses;
 }
 
-function hideCountdownOne() {
-  document.getElementById("waitingOne").classList.add("hidden");
-  document.getElementById("crossOne").classList.add("hidden");
+function hideCountdown(waiting, cross) {
+  waiting.classList.add("hidden");
+  cross.classList.add("hidden");
 }
 
-function hideCountdownTwo() {
-  document.getElementById("waitingTwo").classList.add("hidden");
-  document.getElementById("crossTwo").classList.add("hidden");
-}
 
 
 // Counter Function
@@ -336,7 +332,6 @@ class Obstacle {
 }
 
 // Mask
-let masks = [];
 class Mask extends Obstacle {
   constructor(ctx) {
     super(ctx);
@@ -357,7 +352,6 @@ function updateMasks() {
 }
 
 // Injection
-let injections = [];
 class Injection extends Obstacle {
   constructor(ctx) {
     super(ctx);
@@ -379,7 +373,6 @@ function updateInjections() {
 }
 
 // Virus
-let viruses = [];
 class Virus extends Obstacle {
   constructor(ctx) {
     super(ctx);
@@ -389,7 +382,7 @@ class Virus extends Obstacle {
   }
 }
 function createVirus(ctx) {
-  if (gameFrames % 140 === 0) {
+  if (gameFrames % 130 === 0) {
     viruses.push(new Virus(ctx));
   }
 }
@@ -401,8 +394,6 @@ function updateVirus() {
 }
 
 // Querdenker
-
-let querdenker = [];
 class Querdenker extends Obstacle {
   constructor(ctx) {
     super(ctx);
@@ -433,6 +424,7 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   lives = 3;
   counterCount = 0;
   countdownOne = 0;
+  crossArr = [];
 
   playerOne.resetPlayer(0, 240);
 
@@ -458,7 +450,7 @@ function startLevelOne() {
   runCountdown(crossOne);
 
   setTimeout(function () {
-    hideCountdownOne();
+    hideCountdown(waitingOne, crossOne);
 
     initializeTimer(30, timerOne);
 
@@ -499,6 +491,13 @@ function startLevelOne() {
   playerOne.drawPlayer();
 }
 
+// Info Two
+
+function switchToInfoTwo() {
+  document.getElementById("levelOne").classList.add("hidden");
+  document.getElementById("infoTwo").classList.remove("hidden");
+}
+
 // Level Two
 
 document.querySelector(".infoTwoButton").addEventListener("click", () => {
@@ -536,7 +535,7 @@ function startLevelTwo() {
   runCountdown(crossTwo);
 
   setTimeout(() => {
-    hideCountdownTwo();
+    hideCountdown(waitingTwo, crossTwo);
     initializeTimer(30, timerTwo);
 
     let intervalIdTwo = setInterval(() => {
