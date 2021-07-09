@@ -92,6 +92,34 @@ function startTimer(count, timerDiv) {
   timerDiv.innerHTML = `You start at ${count} seconds.`;
 }
 
+// Countdown Circles Function
+
+function initializeCountdown(waitingDiv) {
+  const circlesArr = [];
+  for (let i = 1; i <= 3; i++){
+    circlesArr.push(`<img class="circlesImg" src="./images/wait.png"></img>`);
+  }
+  let circles = circlesArr.join(" ");
+  waitingDiv.innerHTML = `30 seconds start in ${circles}`;
+  
+}
+
+// function updateCountdown(){
+//   for (let i=3; i>=0; i--){
+//     circlesArr.pop(`<img class="circlesImg" src="./images/wait.png"></img>`)
+//   }
+// }
+
+
+
+function hideCountdownOne() {
+  document.getElementById("waitingOne").classList.add("hidden");
+}
+
+function hideCountdownTwo() {
+  document.getElementById("waitingTwo").classList.add("hidden");
+}
+
 // Timer Run Out
 
 function timeRunOut(interval) {
@@ -370,14 +398,19 @@ function startLevelOne() {
   const timerOne = document.querySelector("#timerOne");
   initializeCounter(counterCount, counterOne);
   initializeLives(lives, livesOne);
-  startTimer(10, timerOne);
+  startTimer(30, timerOne);
 
   document.onkeydown = function (e) {
     keyControl(e, playerOne);
   }
 
+  initializeCountdown(waitingOne);
+  //updateCountdown();
+
   setTimeout(function () {
-    initializeTimer(10, timerOne);
+    hideCountdownOne();
+
+    initializeTimer(30, timerOne);
 
     // Playground
     let intervalIdOne = setInterval(() => {
@@ -410,7 +443,7 @@ function startLevelOne() {
       timeRunOut(intervalIdOne);
       gameFrames++;
     }, 20);
-  }, 3000);
+   }, 3000);
 
   bgOne.drawBg();
   playerOne.drawPlayer();
@@ -439,7 +472,7 @@ function startLevelTwo() {
   const timerTwo = document.querySelector("#timerTwo");
   initializeCounter(counterCount, counterTwo);
   initializeLives(lives, livesTwo);
-  startTimer(10, timerTwo);
+  startTimer(30, timerTwo);
 
   document.onkeydown = function (e) {
     keyControl(e, playerTwo);
@@ -447,7 +480,7 @@ function startLevelTwo() {
 
   setTimeout(() => {
 
-  initializeTimer(10, timerTwo);
+  initializeTimer(30, timerTwo);
 
   let intervalIdTwo = setInterval(() => {
 
