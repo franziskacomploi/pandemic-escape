@@ -23,7 +23,15 @@ function switchToInfoTwo() {
 function switchToWin() {
   document.getElementById("levelTwo").classList.add("hidden");
   document.getElementById("win").classList.remove("hidden");
+  document.getElementById("finishScreen").innerHTML = `${counterCount}`;
 }
+
+// Play again Button at Win Screen
+
+document.querySelector(".winButton").addEventListener("click", () => {
+  document.getElementById("win").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+});
 
 // Level one Canvas
 
@@ -43,7 +51,15 @@ let badSound = new Audio("./audio/bad.mp3");
 // Lives Function
 
 function switchToGameOver() {
-  document.getElementById("levelOne").classList.add("hidden");
+  const levelOne = document.getElementById("levelOne");
+  const levelTwo = document.getElementById("levelTwo");
+  
+  if (!levelOne.classList.contains("hidden")) {
+    levelOne.classList.add("hidden");
+  } else if (!levelTwo.classList.contains("hidden")) {
+    levelTwo.classList.add("hidden");
+  }
+
   document.getElementById("gameOver").classList.remove("hidden");
   timerRunOut = 0;
 }
@@ -295,7 +311,7 @@ class Mask extends Obstacle {
   }
 }
 function createMasks(ctx) {
-  if (gameFrames % 180 === 0) {
+  if (gameFrames % 170 === 0) {
     masks.push(new Mask(ctx));
   }
 }
@@ -317,7 +333,7 @@ class Injection extends Obstacle {
   }
 }
 function createInjections(ctx) {
-  if (gameFrames % 300 === 0) {
+  if (gameFrames % 250 === 0) {
     injections.push(new Injection(ctx));
   }
 }
@@ -339,7 +355,7 @@ class Virus extends Obstacle {
   }
 }
 function createVirus(ctx) {
-  if (gameFrames % 150 === 0) {
+  if (gameFrames % 140 === 0) {
     viruses.push(new Virus(ctx));
   }
 }
@@ -362,7 +378,7 @@ class Querdenker extends Obstacle {
   }
 }
 function createQuerdenker(ctx) {
-  if (gameFrames % 160 === 0) {
+  if (gameFrames % 130 === 0) {
     querdenker.push(new Querdenker(ctx));
   }
 }
@@ -467,6 +483,8 @@ document.querySelector(".infoTwoButton").addEventListener('click', () => {
     lives = 3;
     masks = [];
     viruses = []
+
+    playerTwo.resetPlayer(0,240);
 
     startLevelTwo();
 })
