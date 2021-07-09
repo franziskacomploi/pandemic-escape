@@ -62,6 +62,7 @@ function switchToGameOver() {
 
   document.getElementById("gameOver").classList.remove("hidden");
   timerRunOut = 0;
+  crossArr = [];
 }
 
 function initializeLives(lives, livesDiv) {
@@ -120,17 +121,34 @@ function initializeCountdown(waitingDiv) {
   }
   let circles = circlesArr.join(" ");
   waitingDiv.innerHTML = `<p>30 seconds start in<br> ${circles} </p>`;
-
 }
 
-const crossArr = [];
+function showCountdown(circles, crosses) {
+  circles.classList.remove("hidden");
+  crosses.classList.remove("hidden");
+}
+
+let countdownOne = 0;
+
+function runCountdown(insertDiv) {
+  let countdownId = setInterval(() => {
+    addCross(insertDiv);
+    updateCross(insertDiv);
+    countdownOne++;
+    if (countdownOne === 3) {
+      clearInterval(countdownId);
+    }
+  }, 1000);
+}
+
+let crossArr = [];
 
 function addCross() {
-  let cross = `<img class="crossImg" src="./images/cross.png".></img>`
-  crossArr.push(cross)
+  let cross = `<img class="crossImg" src="./images/cross.png".></img>`;
+  crossArr.push(cross);
 }
 
-function updateCross(crossDiv){
+function updateCross(crossDiv) {
   let crosses = crossArr.join(" ");
   crossDiv.innerHTML = crosses;
 }
@@ -400,6 +418,7 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   timerRunOut = 1;
   lives = 3;
   counterCount = 0;
+  countdownOne = 0;
 
   playerOne.resetPlayer(0, 240);
 
@@ -423,18 +442,10 @@ function startLevelOne() {
   document.onkeydown = function (e) {
     keyControl(e, playerOne);
   };
-
-  initializeCountdown(waitingOne);
-    let countdownOne = 0;
-    let countdownId = setInterval(() => {
-      addCross(crossOne);
-      updateCross(crossOne);
-      countdownOne++;
-      if (countdownOne === 3) {
-        clearInterval(countdownId);
-      }
-    },1000)
   
+  showCountdown(waitingOne, crossOne);
+  initializeCountdown(waitingOne);
+  runCountdown(crossOne);
 
   setTimeout(function () {
     hideCountdownOne();
@@ -473,7 +484,6 @@ function startLevelOne() {
       gameFrames++;
     }, 20);
   }, 4000);
-  
 
   bgOne.drawBg();
   playerOne.drawPlayer();
