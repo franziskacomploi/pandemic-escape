@@ -83,6 +83,13 @@ button:hover {
     text-align: center;
     align-items: center;
 }
+#crossOne {
+    position: absolute;
+    margin-top: 270px;
+    margin-left: 250px;
+    padding: 10px;
+    z-index: 3;
+}
 
 .circlesImg {
     width: 50px;
