@@ -120,18 +120,16 @@ function initializeCountdown(waitingDiv) {
   }
   let circles = circlesArr.join(" ");
   waitingDiv.innerHTML = `<p>30 seconds start in<br> ${circles} </p>`;
-  // setInterval(() => {
-  //   for (let i = 3; i >= 0; i--){
-  //     circlesArr.pop(circle)
-  //     console.log(circlesArr)
-  //   }
-  // }, 1000)
 }
 
+const crossArr = [];
+
 function addCross(waitingDiv) {
-  let cross = `<img class="crossImg" src="./images/cross.png".></img>`;
-  const crossArr = [];
-  crossArr.push(cross);
+  let cross = `<img class="crossImg" src="./images/cross.png".></img>`
+  crossArr.push(cross)
+}
+
+function updateCross(waitingDiv){
   let crosses = crossArr.join(" ");
   waitingDiv.innerHTML = crosses;
 }
