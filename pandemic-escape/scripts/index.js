@@ -510,6 +510,8 @@ document.querySelector(".infoTwoButton").addEventListener("click", () => {
   lives = 3;
   masks = [];
   viruses = [];
+  countdownOne = 0;
+  crossArr = [];
 
   playerTwo.resetPlayer(0, 240);
 
@@ -529,7 +531,12 @@ function startLevelTwo() {
     keyControl(e, playerTwo);
   };
 
+  showCountdown(waitingTwo, crossTwo);
+  initializeCountdown(waitingTwo);
+  runCountdown(crossTwo);
+
   setTimeout(() => {
+    hideCountdownTwo();
     initializeTimer(30, timerTwo);
 
     let intervalIdTwo = setInterval(() => {
@@ -568,7 +575,7 @@ function startLevelTwo() {
       timeRunOut(intervalIdTwo);
       gameFrames++;
     }, 20);
-  }, 3000);
+  }, 4000);
   bgTwo.drawBg();
   playerTwo.drawPlayer();
 }
