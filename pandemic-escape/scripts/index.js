@@ -125,20 +125,12 @@ function initializeCountdown(waitingDiv) {
 
 const crossArr = [];
 
-<<<<<<< HEAD
 function addCross() {
-=======
-function addCross(waitingDiv) {
->>>>>>> d40192570885cf1fdbf7f78fb5a49a5376394d99
   let cross = `<img class="crossImg" src="./images/cross.png".></img>`
   crossArr.push(cross)
 }
 
-<<<<<<< HEAD
 function updateCross(crossDiv){
-=======
-function updateCross(waitingDiv){
->>>>>>> d40192570885cf1fdbf7f78fb5a49a5376394d99
   let crosses = crossArr.join(" ");
   crossDiv.innerHTML = crosses;
 }
