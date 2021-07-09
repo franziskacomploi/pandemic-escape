@@ -1,3 +1,14 @@
+
+// Variables 
+
+let gameFrames = 0;
+let timerRunOut = 1;
+let lives = 3;
+let counterCount = 0;
+let countdownOne = 0;
+let crossArr = [];
+
+
 // Start Screen
 
 document.querySelector(".startButton").addEventListener("click", () => {
@@ -29,6 +40,10 @@ function switchToWin() {
 // Play again Button at Win Screen
 
 document.querySelector(".winButton").addEventListener("click", () => {
+  gameFrames = 0;
+  lives = 3;
+  masks = [];
+  viruses = [];
   document.getElementById("win").classList.add("hidden");
   document.getElementById("home").classList.remove("hidden");
 });
@@ -47,6 +62,7 @@ let ctxTwo = canvasTwo.getContext("2d");
 
 let goodSound = new Audio("./audio/good.mp3");
 let badSound = new Audio("./audio/bad.mp3");
+
 
 // Lives Function
 
@@ -111,6 +127,14 @@ function startTimer(count, timerDiv) {
   timerDiv.innerHTML = `You start at ${count} seconds.`;
 }
 
+// Timer Run Out
+
+function timeRunOut(interval) {
+  if (timerRunOut == 0) {
+    clearInterval(interval);
+  }
+}
+
 // Countdown Circles Function
 
 function initializeCountdown(waitingDiv) {
@@ -128,8 +152,6 @@ function showCountdown(circles, crosses) {
   crosses.classList.remove("hidden");
 }
 
-let countdownOne = 0;
-
 function runCountdown(insertDiv) {
   let countdownId = setInterval(() => {
     addCross(insertDiv);
@@ -140,8 +162,6 @@ function runCountdown(insertDiv) {
     }
   }, 1000);
 }
-
-let crossArr = [];
 
 function addCross() {
   let cross = `<img class="crossImg" src="./images/cross.png".></img>`;
@@ -160,15 +180,9 @@ function hideCountdownOne() {
 
 function hideCountdownTwo() {
   document.getElementById("waitingTwo").classList.add("hidden");
+  document.getElementById("crossTwo").classList.add("hidden");
 }
 
-// Timer Run Out
-
-function timeRunOut(interval) {
-  if (timerRunOut == 0) {
-    clearInterval(interval);
-  }
-}
 
 // Counter Function
 
@@ -425,10 +439,6 @@ document.querySelector(".infoOneButton").addEventListener("click", () => {
   startLevelOne();
 });
 
-let gameFrames = 0;
-let timerRunOut = 1;
-let lives = 3;
-let counterCount = 0;
 
 // Start Level One
 
